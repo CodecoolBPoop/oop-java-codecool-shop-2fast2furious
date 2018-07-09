@@ -1,4 +1,4 @@
-package src.main.java.com.codecool.shop.model;
+package com.codecool.shop.model;
 
 public enum Status {
     NEW,

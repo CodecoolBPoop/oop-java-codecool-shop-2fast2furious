@@ -1,4 +1,4 @@
-package src.main.java.com.codecool.shop.model;
+package com.codecool.shop.model;
 
 import java.util.ArrayList;
 
@@ -24,4 +24,9 @@ public class OrderedProduct {
     public int getProductId() {
         return product.getId();
     }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
 }

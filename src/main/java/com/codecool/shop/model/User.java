@@ -1,4 +1,4 @@
-package src.main.java.com.codecool.shop.model;
+package com.codecool.shop.model;
 
 public class User {
 
@@ -10,9 +10,16 @@ public class User {
     private int id;
     private static int count;
 
-    public User() {
+    public User(String name, String phoneNumber, String email, Address shippingAddress, Address billingAddress) {
         count++;
         id = count;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.shippingAddress = shippingAddress;
+        this.billingAddress = billingAddress;
     }
+
+
 
 }

@@ -1,4 +1,4 @@
-package src.main.java.com.codecool.shop.model;
+package com.codecool.shop.model;
 
 public class Address {
 
@@ -7,5 +7,33 @@ public class Address {
     private int zipCode;
     private String address;
     private String addressType;
+
+    public Address(String country, String city, String address, String addressType, int zipCode) {
+        this.country = country;
+        this.city = city;
+        this.address = address;
+        this.addressType = addressType;
+        this.zipCode = zipCode;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public int getZipCode() {
+        return zipCode;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getAddressType() {
+        return addressType;
+    }
 
 }
