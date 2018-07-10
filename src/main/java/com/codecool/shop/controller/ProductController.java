@@ -2,9 +2,11 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.dao.SupplierDao;
 import org.omg.Messaging.SYNC_WITH_TRANSPORT;
@@ -45,7 +47,8 @@ public class ProductController extends HttpServlet {
         context.setVariable("recipient", "World");
         context.setVariable("selectedCategory", category);
         context.setVariable("selectedSupplier", supplier);
-        context.setVariable("category", productCategoryDataStore.find(1));
+        context.setVariable("allProdCat", productCategoryDataStore.getAll());
+        context.setVariable("allSupp", supplierDataStore.getAll());
         context.setVariable("products", productDataStore.getBy(category, supplier));
         engine.process("product/index.html", context, resp.getWriter());
     }
