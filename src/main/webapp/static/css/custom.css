@@ -60,3 +60,14 @@
 {
     margin: 0 0 11px;
 }
+
+.form-control{
+    display: inline;
+    width: 10%;
+}
+
+#filterby{
+    display: inline;
+}
+
+

@@ -34,6 +34,18 @@
 </div>
 
 <div class="container">
+    <div id="filterbycont">
+        <span id="filterby">Filter by </span>
+        <form action="/" method="get">
+            <select class="form-control">
+                <option th:each="prodCat,iterStat : ${allProdCat}" th:text="${prodCat.getName()}" th:value="${prodCat.getName()}">Default</option>
+            </select>
+            <select class="form-control">
+                <option th:each="supp,iterStat : ${allSupp}" th:text="${supp.getName()}" th:value="${supp.getName()}">Default</option>
+            </select>
+        </form>
+    </div>
+
     <div class="well well-sm">
         <strong th:text="${category.name}">Category Title</strong>
     </div>
