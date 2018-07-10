@@ -32,4 +32,10 @@ public class OrderedProduct {
 
     public String getName() { return product.getName(); }
 
+    public String getPrice(){return product.getPrice();}
+
+    public float getPriceAsFloat(){return product.getPriceAsFloat();}
+
+    public int getId(){return product.getId();}
+
 }

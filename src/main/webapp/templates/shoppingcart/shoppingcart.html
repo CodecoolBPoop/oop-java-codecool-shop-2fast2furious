@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Codecool" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Shopping Cart</title>
+
+    <!-- Latest compiled and minified Jquery -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/shoppingcart.css" />
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
+</head>
+<body>
+    <h1>Shopping Cart</h1>
+
+    <div class="container" th:switch="${total}">
+        <h1 th:case="0">Your shoppingcart is empty :(</h1>
+        <div name="notEmpty" th:case="*">
+            <table class="table">
+                <thead>
+                <tr id="thead">
+                    <th scope="col">Product</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Add more/Take out</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="prod,iterStat : ${products}">
+                    <td th:text="${prod.getName()}">Lenovo Phone</td>
+                    <td th:text="${prod.getPrice()}">100 USD</td>
+                    <td th:text="${prod.getQuantity()}">10 pcs</td>
+                    <td>
+                        <button th:attr="data-prodid=${prod.getId()}" type="button" class="btn btn-light"><i class="fas fa-caret-up"></i></button>
+                        <button th:attr="data-prodid=${prod.getId()}" type="button" class="btn btn-light"><i class="fas fa-caret-down"></i></button>
+                    </td>
+                </tr>
+                </tbody>
+
+            </table>
+            <div id="buttoncont">
+                <button class="btn btn-success">Check Out</button>
+                <button class="btn btn-success" disabled>Pay</button>
+            </div>
+            <h1 th:text="'The total of your order is '+  ${total} + ' USD'">Total</h1>
+            <div id="checkout">
+                <h2>Check out</h2>
+                <form action="" id="checkoutform">
+                    <label for="exampleInputEmail1">Name</label>
+                    <input class="form-control" id="exampleInputEmail1" placeholder="Name" name="name">
+                    <label for="email">Email</label>
+                    <input class="form-control" id="email" placeholder="Email" name="email">
+                    <label for="address">Address</label>
+                    <input class="form-control" id="address" placeholder="Address" name="address">
+                </form>
+
+            </div>
+
+
+        </div>
+        <a href="/" class="btn btn-success">Back to shopping</a>
+
+
+    </div>
+
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+h1{
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+thead{
+
+
+}
+
+#thead{
+    border-style: solid;
+    border-radius: 1%;
+    border-color: #428bca;
+    background-color: #428bca;
+    margin-bottom: 200px;
+}
+
+#buttoncont{
+    text-align: right;
+}
+
+#checkoutform{
+    width: 60%;
+}
+
+#checkout{
+    align-items: center;
+}
+
+.form-control{
+    width: 100%;
+    margin-bottom: 20px;
+}

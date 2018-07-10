@@ -69,5 +69,13 @@ public class Order {
 
     }
 
+    public float getTotal(){
+        float total = 0;
+        for(OrderedProduct prod: shoppingCart){
+            total += prod.getPriceAsFloat() * prod.getQuantity();
+        }
+        return total;
+    }
+
 
 }

@@ -47,7 +47,7 @@
             <option th:each="supp,iterStat : ${allSupp}" th:text="${supp.getName()}" th:value="${supp.getName()}" th:selected="${supp.getName() == selectedSupplier}">Default</option>
         </select>
         <input type="submit" class="btn btn-success" id="filtersubmit">
-        <i class="fas fa-shopping-cart" id="shoppingcarticon"></i>
+        <a href="/shopping_cart"><i class="fas fa-shopping-cart" id="shoppingcarticon"></i></a>
     </form>
 
 
