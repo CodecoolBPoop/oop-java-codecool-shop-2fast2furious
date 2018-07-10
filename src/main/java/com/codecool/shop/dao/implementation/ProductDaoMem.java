@@ -5,10 +5,12 @@ import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ProductDaoMem implements ProductDao {
 
@@ -49,12 +51,16 @@ public class ProductDaoMem implements ProductDao {
     }
 
     @Override
-    public List<Product> getBy(Supplier supplier) {
-        return data.stream().filter(t -> t.getSupplier().equals(supplier)).collect(Collectors.toList());
+    public List<Product> getBy(String category, String supplier) {
+
+        List<Product> result = data.stream().collect(Collectors.toList());
+        if (!supplier.equals("ALL")) {
+            result = result.stream().filter(t -> t.getSupplier().getName().equals(supplier)).collect(Collectors.toList());
+        }
+        if (!category.equals("ALL")) {
+            result = result.stream().filter(t -> t.getProductCategory().getName().equals(category)).collect(Collectors.toList());
+        }
+        return result;
     }
 
-    @Override
-    public List<Product> getBy(ProductCategory productCategory) {
-        return data.stream().filter(t -> t.getProductCategory().equals(productCategory)).collect(Collectors.toList());
-    }
 }
