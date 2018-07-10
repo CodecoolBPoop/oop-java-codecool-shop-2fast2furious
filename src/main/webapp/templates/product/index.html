@@ -24,6 +24,8 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
 </head>
 
@@ -34,20 +36,26 @@
 </div>
 
 <div class="container">
-    <div id="filterbycont">
-        <span id="filterby">Filter by </span>
-        <form action="/" method="get">
-            <select class="form-control">
-                <option th:each="prodCat,iterStat : ${allProdCat}" th:text="${prodCat.getName()}" th:value="${prodCat.getName()}">Default</option>
-            </select>
-            <select class="form-control">
-                <option th:each="supp,iterStat : ${allSupp}" th:text="${supp.getName()}" th:value="${supp.getName()}">Default</option>
-            </select>
-        </form>
-    </div>
+
+    <span id="filterby">Filter by </span>
+    <form method="GET" class="form-inline">
+        <select name="category" class="form-control">
+            <option th:each="prodCat,iterStat : ${allProdCat}" th:text="${prodCat.getName()}" th:value="${prodCat.getName()}" th:selected="${prodCat.getName() == selectedCategory}">Default</option>
+        </select>
+        <select name="supplier" class="form-control">
+            <option th:each="supp,iterStat : ${allSupp}" th:text="${supp.getName()}" th:value="${supp.getName()}" th:selected="${supp.getName() == selectedSupplier}">Default</option>
+        </select>
+        <input type="submit" class="btn btn-success" id="filtersubmit">
+        <i class="fas fa-shopping-cart" id="shoppingcarticon"></i>
+    </form>
+
+
+
+
+
 
     <div class="well well-sm">
-        <strong th:text="${category.name}">Category Title</strong>
+        <strong th:text="${selectedCategory}">Category Title</strong>
     </div>
 
     <div id="products" class="row list-group">
