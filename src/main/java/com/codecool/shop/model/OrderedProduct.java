@@ -9,6 +9,7 @@ public class OrderedProduct {
 
     public OrderedProduct(Product product) {
         quantity = 1;
+        this.product = product;
     }
 
     public void incrementQuantity() {
@@ -28,5 +29,7 @@ public class OrderedProduct {
     public int getQuantity() {
         return quantity;
     }
+
+    public String getName() { return product.getName(); }
 
 }

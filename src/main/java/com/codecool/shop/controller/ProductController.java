@@ -32,7 +32,6 @@ public class ProductController extends HttpServlet {
         if (category == null) { category = "ALL"; }
         String supplier = req.getParameter("supplier");
         if (supplier == null) { supplier = "ALL"; }
-        //System.out.println(category);
 
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
