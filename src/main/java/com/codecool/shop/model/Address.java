@@ -32,13 +32,13 @@ public class Address {
         return address;
     }
 
-    public static Address parseToAddress(String jsonAddress) {
-        JSONObject obj = new JSONObject(jsonAddress);
+    public static Address parseToAddress(JSONObject obj) {
 
+        System.out.println(obj.getString("country"));
         return new Address(obj.getString("country"),
                            obj.getString("city"),
                            obj.getString("address"),
-                           Integer.parseInt(obj.getString("zipCode")));
+                           Integer.parseInt(obj.getString("zip")));
     }
 
 }

@@ -8,13 +8,9 @@ import org.json.JSONObject;
 
 public class CheckoutProcess {
 
-    public static boolean Checkout(Order order, JSONObject userData) {
+    public static boolean Checkout(Order order, String name, String phoneNumber, String email, JSONObject saddress, JSONObject baddress) {
         User user = User.getInstance();
-        user.setUserDataForCheckout(userData.getString("name"),
-                                    userData.getString("phoneNumber"),
-                                    userData.getString("email"),
-                                    Address.parseToAddress(userData.getString("saddress")),
-                                    Address.parseToAddress(userData.getString("baddress")));
+        user.setUserDataForCheckout(name, phoneNumber, email, Address.parseToAddress(saddress), Address.parseToAddress(baddress));
         order.setUser(user);
         order.setStatus(Status.CHECKED_OUT);
         return true;

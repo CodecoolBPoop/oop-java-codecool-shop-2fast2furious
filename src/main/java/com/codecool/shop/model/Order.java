@@ -81,5 +81,9 @@ public class Order {
         return total;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
 
 }
