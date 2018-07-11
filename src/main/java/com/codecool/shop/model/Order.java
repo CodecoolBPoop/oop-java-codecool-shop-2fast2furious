@@ -30,6 +30,10 @@ public class Order {
         this.user = user;
     }
 
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     public void addProduct(Product newProduct) {
         boolean isNew = true;
         for (OrderedProduct product : shoppingCart) {

@@ -1,18 +1,18 @@
 package com.codecool.shop.model;
 
+import org.json.*;
+
 public class Address {
 
     private String country;
     private String city;
     private int zipCode;
     private String address;
-    private String addressType;
 
-    public Address(String country, String city, String address, String addressType, int zipCode) {
+    public Address(String country, String city, String address, int zipCode) {
         this.country = country;
         this.city = city;
         this.address = address;
-        this.addressType = addressType;
         this.zipCode = zipCode;
     }
 
@@ -32,8 +32,13 @@ public class Address {
         return address;
     }
 
-    public String getAddressType() {
-        return addressType;
+    public static Address parseToAddress(String jsonAddress) {
+        JSONObject obj = new JSONObject(jsonAddress);
+
+        return new Address(obj.getString("country"),
+                           obj.getString("city"),
+                           obj.getString("address"),
+                           Integer.parseInt(obj.getString("zipCode")));
     }
 
 }
