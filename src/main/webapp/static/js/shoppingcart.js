@@ -82,7 +82,7 @@ function sendCheckout() {
                     city: scity,
                     country: scountry,
                     zip: szip
-                },
+                }),
             success:function (resp) {
                 console.log(resp)
                 $("#checkouttoggle").prop("disabled", true);

@@ -87,4 +87,6 @@ public class Order {
         this.payment = payment;
     }
 
+    public User getUser() { return user; }
+
 }
