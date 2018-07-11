@@ -1,6 +1,7 @@
 package com.codecool.shop.model;
 
-public enum Payment {
-    CREDIT_CARD,
-    PAYPAL
+public class Payment {
+
+    protected float totalPrice;
+
 }
