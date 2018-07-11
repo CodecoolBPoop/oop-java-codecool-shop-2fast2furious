@@ -9,6 +9,7 @@ import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.Product;
+import com.codecool.shop.model.Status;
 import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -33,14 +34,16 @@ public class RemoveFromCart extends HttpServlet {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         Order order = Order.getInstance();
 
-        Product product = productDataStore.find(productId);
-        order.removeProduct(product);
-        System.out.println(order.toString());
 
-        resp.setContentType("text/plain");
-        resp.setCharacterEncoding("UTF-8");
-        resp.getWriter().write("ok");
+        if (order.getStatus() == Status.NEW) {
+            Product product = productDataStore.find(productId);
+            order.removeProduct(product);
+            System.out.println(order.toString());
 
+            resp.setContentType("text/plain");
+            resp.setCharacterEncoding("UTF-8");
+            resp.getWriter().write("ok");
+        }
     }
 
 }
