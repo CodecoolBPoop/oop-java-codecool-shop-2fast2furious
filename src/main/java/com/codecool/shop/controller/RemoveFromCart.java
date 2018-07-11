@@ -37,6 +37,10 @@ public class RemoveFromCart extends HttpServlet {
         order.removeProduct(product);
         System.out.println(order.toString());
 
+        resp.setContentType("text/plain");
+        resp.setCharacterEncoding("UTF-8");
+        resp.getWriter().write(String.valueOf(order.getTotal()));
+
     }
 
 }
