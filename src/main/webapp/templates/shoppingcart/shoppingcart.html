@@ -63,15 +63,15 @@
 
             </table>
             <div id="buttoncont">
-                <button class="btn btn-success">Check Out</button>
-                <button class="btn btn-success" disabled>Pay</button>
+                <button class="btn btn-success" id="checkouttoggle">Check Out</button>
+                <button class="btn btn-success" id="paytoggle">Pay</button>
             </div>
             <h1 th:text="'The total of your order is '+  ${total} + ' USD'" id="total">Total</h1>
             <div id="checkout">
                 <h2>Check out</h2>
                 <form action="" id="checkoutform">
                     <label for="name">Name</label>
-                    <input class="form-control" id="name" placeholder="Name" >
+                    <input class="form-control" id="name" placeholder="Name" required>
                     <label for="email">Email</label>
                     <input class="form-control" id="email" placeholder="Email">
                     <label for="phonenumber">Phonenumber</label>
@@ -111,10 +111,47 @@
                     </div>
                     <label for="baddress">Address</label>
                     <input class="form-control" id="baddress" placeholder="Address">
+                    <input type="submit" class="btn btn-success" id="checkoutsend">
+                    <div class="alert alert-danger" role="alert" id="checkoutdanger">
+                        Something is wrong
+                    </div>
                 </form>
-                <button class="btn btn-success" id="checkoutsend">Send</button>
                 <hr>
             </div>
+            <div id="pay">
+                <div id="ccpay">
+                    <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-secondary">Credit Card</button>
+                        <button type="button" class="btn btn-secondary">PayPal</button>
+                    </div>
+                    <h3>Credit Card</h3>
+                    <form action="">
+                        <label for="ccnum">Credit Card Number</label>
+                        <input class="form-control" id="ccnum" placeholder="Credit Card Number" required>
+                        <label for="ccholder">Card Holder's Name</label>
+                        <input class="form-control" id="ccholder" placeholder="Card Holder's Name">
+                        <!--<label for="cvc">CVC Number</label>
+                        <input class="form-control" id="cvc" placeholder="CVC Number">
+                        <label for="expdate">Expiry Date</label>
+                        <input class="form-control" id="expdate" placeholder="Expiry Date">-->
+
+                            <div class="col">
+                                <label for="cvc">CVC Number</label>
+                                <input type="text" class="form-control" placeholder="CVC Number" id="cvc">
+                            </div>
+                            <div class="col">
+                                <label for="expdate">Expiry Date</label>
+                                <input type="text" class="form-control" placeholder="YY/MM/DD" id="expdate">
+                            </div>
+                        <br>
+                        <button class="btn btn-success" id="ccsend">Send</button>
+                    </form>
+                </div>
+                <div id="paypal">
+                    <img src="/static/img/paypal.png" alt="">
+                </div>
+            </div>
+            <hr style="margin-bottom: 20px">
 
 
         </div>
