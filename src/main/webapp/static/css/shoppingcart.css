@@ -26,6 +26,7 @@ thead{
 
 #checkout{
     align-items: center;
+    display: none;
 }
 
 .form-control{
@@ -47,4 +48,21 @@ thead{
 
 .form-row{
     margin-left: 10px;
+}
+
+.alert{
+    margin-top: 20px;
+}
+
+#pay{
+    width: 60%;
+    display: none;
+}
+
+#cvc #expdate{
+    width: 30%;
+}
+
+#paypal{
+    text-align: center;
 }

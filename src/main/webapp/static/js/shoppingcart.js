@@ -38,7 +38,8 @@ function decrementButtonListener() {
 }
 
 function sendCheckout() {
-    $("#checkoutsend").click(function () {
+    $("#checkoutsend").click(function (event) {
+        event.preventDefault();
         let name = $("#name").val()
         let phonenumber = $("#phonenumber").val()
         let email = $("#email").val()
@@ -50,6 +51,16 @@ function sendCheckout() {
         let bcity = $("#bcity").val()
         let bcountry = $("#bcountry").val()
         let bzip = $("#bzip").val()
+
+        let data = [name, phonenumber,event,saddress,scity, scountry, szip, baddress, bcity, bcountry, bzip];
+
+        for(let element of data){
+            console.log(element);
+            if(element === ""){
+                $("#checkoutdanger").show();
+                return
+            }
+        }
 
         $.ajax({
             url: "/checkout",
@@ -68,12 +79,27 @@ function sendCheckout() {
                     city: scity,
                     country: scountry,
                     zip: szip
-                }
+                },
             success:function (resp) {
                 console.log(resp)
+                $("#checkouttoggle").prop("disabled", true);
+                $("#paytoggle").prop("disabled", false);
+                $("#checkout").slideToggle();
             }
             }
         })
+    })
+}
+
+function checkOutToggle() {
+    $("#checkouttoggle").click(function () {
+        $("#checkout").slideToggle();
+    })
+}
+
+function payToggle() {
+    $("#paytoggle").click(function () {
+        $("#pay").slideToggle()
     })
 }
 
@@ -82,10 +108,16 @@ function main() {
     incrementButtonsListener();
     decrementButtonListener();
     sendCheckout();
+    checkOutToggle();
+    payToggle();
+
 }
 
 
 $(document).ready(function () {
     main()
+    $("#paytoggle").prop("disabled", true);
+    $("#checkoutdanger").hide();
+
 })
 
