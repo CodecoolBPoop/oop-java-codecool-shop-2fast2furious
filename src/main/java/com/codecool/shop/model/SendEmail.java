@@ -35,7 +35,7 @@ public class SendEmail {
 
         String from = "2fast2furiouswebshop";
         String pass = "fastfurious";
-        String[] to = { "brunnerm7@gmail.com" }; // list of recipient email addresses
+        String[] to = { "ide köll a cím" }; // list of recipient email addresses
         String subject = "Ride or die!";
         String body = buildBody(order);
 
