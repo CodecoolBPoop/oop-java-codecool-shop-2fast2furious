@@ -37,6 +37,9 @@ public class AddToCart extends HttpServlet {
         order.addProduct(product);
         System.out.println(order.toString());
 
+        resp.setContentType("text/plain");
+        resp.setCharacterEncoding("UTF-8");
+        resp.getWriter().write(String.valueOf(order.getTotal()));
     }
 
 }

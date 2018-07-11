@@ -32,3 +32,19 @@ thead{
     width: 100%;
     margin-bottom: 20px;
 }
+
+.address{
+
+    display: inline;
+
+}
+
+.col{
+    width: 31%;
+    display: inline-block;
+    margin-right: 13px;
+}
+
+.form-row{
+    margin-left: 10px;
+}
