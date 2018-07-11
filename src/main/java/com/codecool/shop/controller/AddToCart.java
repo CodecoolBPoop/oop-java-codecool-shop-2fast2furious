@@ -4,6 +4,7 @@ import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.Product;
+import com.codecool.shop.model.Status;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,13 +24,15 @@ public class AddToCart extends HttpServlet {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         Order order = Order.getInstance();
 
-        Product product = productDataStore.find(productId);
-        order.addProduct(product);
-        System.out.println(order.toString());
+        if (order.getStatus() == Status.NEW) {
+            Product product = productDataStore.find(productId);
+            order.addProduct(product);
+            System.out.println(order.toString());
 
-        resp.setContentType("text/plain");
-        resp.setCharacterEncoding("UTF-8");
-        resp.getWriter().write(String.valueOf(order.getTotal()));
+            resp.setContentType("text/plain");
+            resp.setCharacterEncoding("UTF-8");
+            resp.getWriter().write(String.valueOf(order.getTotal()));
+        }
     }
 
 }

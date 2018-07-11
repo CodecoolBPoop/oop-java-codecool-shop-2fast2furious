@@ -5,7 +5,7 @@ import org.json.JSONObject;
 
 public class CheckoutProcess {
 
-    public static boolean Checkout(Order order, String name, String phoneNumber, String email, JSONObject saddress, JSONObject baddress) {
+    public static boolean checkout(Order order, String name, String phoneNumber, String email, JSONObject saddress, JSONObject baddress) {
         User user = User.getInstance();
         user.setUserDataForCheckout(name, phoneNumber, email, Address.parseToAddress(saddress), Address.parseToAddress(baddress));
         order.setUser(user);

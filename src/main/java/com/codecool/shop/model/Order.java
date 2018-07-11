@@ -10,9 +10,7 @@ public class Order {
     private ArrayList<OrderedProduct> shoppingCart = new ArrayList<OrderedProduct>();
     private User user;
     private Status status;
-    private Payment paymentType;
-    private int id;
-    private static int count;
+    private Payment payment;
 
     private Order() {
     }
@@ -85,5 +83,8 @@ public class Order {
         return status;
     }
 
+    public void setCardData(Payment payment) {
+        this.payment = payment;
+    }
 
 }
