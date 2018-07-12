@@ -24,10 +24,15 @@ public class PaymentController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        JSONObject cardData = new JSONObject(req);
+        String cardNumber = req.getParameter("cardnumber");
+        String holderName = req.getParameter("holdername");
+        Integer cvcNumber = Integer.parseInt(req.getParameter("cvcnumber"));
+        String expiryDate = req.getParameter("expirydate");
+
         Order order = Order.getInstance();
 
-        boolean result = PaymentProcess.payment(order, cardData);
+        boolean result = PaymentProcess.payment(order, cardNumber, holderName, cvcNumber, expiryDate);
+        System.out.println(order.getStatus());
 
     }
 

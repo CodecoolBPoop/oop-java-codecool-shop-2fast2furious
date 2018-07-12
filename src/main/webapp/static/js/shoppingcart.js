@@ -46,13 +46,15 @@ function ccPay() {
 
         $.ajax({
             url:"/creditcard_payment",
-            data: JSON.stringify({
+            method: "POST",
+            data: {
                 cardnumber: ccnum,
                 holdername: ccholder,
                 cvcnumber: cvcnum,
                 expirydare: expirydate,
                 message: "eddki:D"
-            })
+            },
+            success: window.location.replace("localhost:8080")
         })
     })
 }
