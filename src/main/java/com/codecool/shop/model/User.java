@@ -29,5 +29,7 @@ public class User {
         this.billingAddress = billingAddress;
     }
 
+    public String getName() { return name; }
+
 
 }

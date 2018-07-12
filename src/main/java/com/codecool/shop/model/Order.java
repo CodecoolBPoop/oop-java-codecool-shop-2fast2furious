@@ -87,6 +87,7 @@ public class Order {
         this.payment = payment;
     }
 
+
     public int getNumberOfOrdered() {
         int summa = 0;
         for (OrderedProduct pr : shoppingCart) {
@@ -94,5 +95,6 @@ public class Order {
         }
         return summa;
     }
+
 
 }
