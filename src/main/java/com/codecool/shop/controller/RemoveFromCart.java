@@ -39,7 +39,7 @@ public class RemoveFromCart extends HttpServlet {
 
         resp.setContentType("text/plain");
         resp.setCharacterEncoding("UTF-8");
-        resp.getWriter().write(String.valueOf(order.getTotal()));
+        resp.getWriter().write("ok");
 
     }
 

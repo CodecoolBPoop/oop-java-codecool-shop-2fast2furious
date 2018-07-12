@@ -63,18 +63,21 @@ function sendCheckout() {
         }
 
         $.ajax({
+            method: "POST",
             url: "/checkout",
+            dataType: "json",
+            async: false,
             data: {
                 name: name,
                 phonenumber: phonenumber,
                 email: email,
-                baddress: {
+                baddress: JSON.stringify({
                     address: baddress,
                     city: bcity,
                     country: bcountry,
                     zip: bzip
-                },
-                saddress: {
+                }),
+                saddress: JSON.stringify({
                     address: saddress,
                     city: scity,
                     country: scountry,
