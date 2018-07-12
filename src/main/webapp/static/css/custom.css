@@ -28,7 +28,15 @@
 .caption{
     position: absolute;
     word-break: break-all;
+    padding-left: 120px; !important;
 
+}
+
+.thumbnail .caption{
+    padding-right: 20px;
+    position: absolute;
+    bottom: 0;
+    padding-bottom: 20px;
 }
 
 .item{
