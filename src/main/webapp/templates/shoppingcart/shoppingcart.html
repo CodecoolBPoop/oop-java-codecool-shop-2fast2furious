@@ -120,31 +120,33 @@
             <div id="pay">
                 <div id="ccpay">
                     <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-secondary">Credit Card</button>
-                        <button type="button" class="btn btn-secondary">PayPal</button>
+                        <button type="button" class="btn btn-secondary" id="ccbutton">Credit Card</button>
+                        <button type="button" class="btn btn-secondary" id="paypalbutton">PayPal</button>
                     </div>
-                    <h3>Credit Card</h3>
-                    <form action="">
-                        <label for="ccnum">Credit Card Number</label>
-                        <input class="form-control" id="ccnum" placeholder="Credit Card Number" required>
-                        <label for="ccholder">Card Holder's Name</label>
-                        <input class="form-control" id="ccholder" placeholder="Card Holder's Name">
-                        <!--<label for="cvc">CVC Number</label>
-                        <input class="form-control" id="cvc" placeholder="CVC Number">
-                        <label for="expdate">Expiry Date</label>
-                        <input class="form-control" id="expdate" placeholder="Expiry Date">-->
+                    <div id="creditcardcont">
+                        <h3>Credit Card</h3>
+                        <form action="">
+                            <label for="ccnum">Credit Card Number</label>
+                            <input class="form-control" id="ccnum" placeholder="Credit Card Number" required>
+                            <label for="ccholder">Card Holder's Name</label>
+                            <input class="form-control" id="ccholder" placeholder="Card Holder's Name">
+                            <!--<label for="cvc">CVC Number</label>
+                            <input class="form-control" id="cvc" placeholder="CVC Number">
+                            <label for="expdate">Expiry Date</label>
+                            <input class="form-control" id="expdate" placeholder="Expiry Date">-->
 
-                            <div class="col">
-                                <label for="cvc">CVC Number</label>
-                                <input type="text" class="form-control" placeholder="CVC Number" id="cvc">
-                            </div>
-                            <div class="col">
-                                <label for="expdate">Expiry Date</label>
-                                <input type="text" class="form-control" placeholder="YY/MM/DD" id="expdate">
-                            </div>
-                        <br>
-                        <button class="btn btn-success" id="ccsend">Send</button>
-                    </form>
+                                <div class="col">
+                                    <label for="cvc">CVC Number</label>
+                                    <input type="text" class="form-control" placeholder="CVC Number" id="cvc">
+                                </div>
+                                <div class="col">
+                                    <label for="expdate">Expiry Date</label>
+                                    <input type="text" class="form-control" placeholder="YY/MM/DD" id="expdate">
+                                </div>
+                            <br>
+                            <button class="btn btn-success" id="ccsend">Send</button>
+                        </form>
+                    </div>
                 </div>
                 <div id="paypal">
                     <img src="/static/img/paypal.png" alt="">

@@ -103,6 +103,22 @@ function payToggle() {
     })
 }
 
+function payPalButton() {
+    $("#paypalbutton").click(function () {
+        $("#creditcardcont").slideUp(function () {
+            $("#paypal").slideDown();
+        })
+    })
+}
+
+function ccButton() {
+    $("#ccbutton").click(function () {
+        $("#paypal").slideUp(function () {
+            $("#creditcardcont").slideDown();
+        })
+    })
+}
+
 
 function main() {
     incrementButtonsListener();
@@ -110,6 +126,8 @@ function main() {
     sendCheckout();
     checkOutToggle();
     payToggle();
+    payPalButton();
+    ccButton();
 
 }
 
