@@ -82,7 +82,7 @@ function sendCheckout() {
                     city: scity,
                     country: scountry,
                     zip: szip
-                },
+                }),
             success:function (resp) {
                 console.log(resp)
                 $("#checkouttoggle").prop("disabled", true);
@@ -106,6 +106,22 @@ function payToggle() {
     })
 }
 
+function payPalButton() {
+    $("#paypalbutton").click(function () {
+        $("#creditcardcont").slideUp(function () {
+            $("#paypal").slideDown();
+        })
+    })
+}
+
+function ccButton() {
+    $("#ccbutton").click(function () {
+        $("#paypal").slideUp(function () {
+            $("#creditcardcont").slideDown();
+        })
+    })
+}
+
 
 function main() {
     incrementButtonsListener();
@@ -113,6 +129,8 @@ function main() {
     sendCheckout();
     checkOutToggle();
     payToggle();
+    payPalButton();
+    ccButton();
 
 }
 
