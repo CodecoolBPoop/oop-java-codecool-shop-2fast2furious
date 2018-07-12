@@ -38,7 +38,6 @@ public class RemoveFromCart extends HttpServlet {
         if (order.getStatus() == Status.NEW) {
             Product product = productDataStore.find(productId);
             order.removeProduct(product);
-            System.out.println(order.toString());
 
             resp.setContentType("text/plain");
             resp.setCharacterEncoding("UTF-8");

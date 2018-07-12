@@ -14,4 +14,6 @@ public class CreditCardPayment extends Payment {
         this.expiryDate = expiryDate;
     }
 
+    public String getCardNumber() { return cardNumber; }
+
 }

@@ -15,6 +15,7 @@ public class PaymentProcess {
         }
 
         order.setStatus(Status.PAID);
+        SendEmail.sendEmail(order);
         return true;
     }
 

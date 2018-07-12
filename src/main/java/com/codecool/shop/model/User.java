@@ -31,5 +31,8 @@ public class User {
 
     public String getName() { return name; }
 
+    public Address getShippingAddress() { return shippingAddress; }
+
+    public Address getBillingAddress() { return billingAddress; }
 
 }
