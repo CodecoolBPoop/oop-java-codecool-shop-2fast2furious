@@ -60,6 +60,10 @@ public class Product extends BaseModel {
         this.supplier.addProduct(this);
     }
 
+    public float getPriceAsFloat(){
+        return defaultPrice;
+    }
+
     @Override
     public String toString() {
         return String.format("id: %1$d, " +

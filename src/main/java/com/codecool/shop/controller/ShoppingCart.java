@@ -23,37 +23,20 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(urlPatterns = {"/"})
-public class ProductController extends HttpServlet {
+@WebServlet(urlPatterns = {"/shopping_cart"})
+public class ShoppingCart extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String category = req.getParameter("category");
-        if (category == null) { category = "ALL"; }
-        String supplier = req.getParameter("supplier");
-        if (supplier == null) { supplier = "ALL"; }
-
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
-        Order order = Order.getInstance();
-
-//        Map params = new HashMap<>();
-//        params.put("category", productCategoryDataStore.find(1));
-//        params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
-
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-//        context.setVariables(params);
+        Order order = Order.getInstance();
+
         context.setVariable("recipient", "World");
-        context.setVariable("selectedCategory", category);
-        context.setVariable("selectedSupplier", supplier);
-        context.setVariable("sizeOfCart", order.getNumberOfOrdered());
-        context.setVariable("allProdCat", productCategoryDataStore.getAll());
-        context.setVariable("allSupp", supplierDataStore.getAll());
-        context.setVariable("products", productDataStore.getBy(category, supplier));
-        engine.process("product/index.html", context, resp.getWriter());
+        context.setVariable("products", order.getShoppingCart());
+        context.setVariable("total", order.getTotal());
+        engine.process("shoppingcart/shoppingcart.html", context, resp.getWriter());
     }
 
 }

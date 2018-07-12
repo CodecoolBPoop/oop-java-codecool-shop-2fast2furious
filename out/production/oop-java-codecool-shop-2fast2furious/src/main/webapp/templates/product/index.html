@@ -24,10 +24,7 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
-    <script src="static/js/cart.js" defer></script>
 </head>
 
 <body>
@@ -37,26 +34,8 @@
 </div>
 
 <div class="container">
-
-    <span id="filterby">Filter by </span>
-    <form method="GET" class="form-inline">
-        <select name="category" class="form-control">
-            <option th:each="prodCat,iterStat : ${allProdCat}" th:text="${prodCat.getName()}" th:value="${prodCat.getName()}" th:selected="${prodCat.getName() == selectedCategory}">Default</option>
-        </select>
-        <select name="supplier" class="form-control">
-            <option th:each="supp,iterStat : ${allSupp}" th:text="${supp.getName()}" th:value="${supp.getName()}" th:selected="${supp.getName() == selectedSupplier}">Default</option>
-        </select>
-        <input type="submit" class="btn btn-success" id="filtersubmit">
-        <a href="/shopping_cart" id="shoppingcartlink" th:value="${sizeOfCart}"><i class="fas fa-shopping-cart" id="shoppingcarticon"></i></a>
-    </form>
-
-
-
-
-
-
     <div class="well well-sm">
-        <strong th:text="${selectedCategory}">Category Title</strong>
+        <strong th:text="${category.name}">Category Title</strong>
     </div>
 
     <div id="products" class="row list-group">
@@ -72,7 +51,7 @@
                             <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                         </div>
                         <div class="col-xs-12 col-md-6">
-                            <a class="btn btn-success addtocart" th:attr="data-prodid=${prod.getId()}">Add to cart</a>
+                            <a class="btn btn-success" href="#">Add to cart</a>
                         </div>
                     </div>
                 </div>
