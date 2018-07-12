@@ -28,7 +28,7 @@
 .caption{
     position: absolute;
     word-break: break-all;
-    padding-left: 120px; !important;
+    padding-left: 120px;
 
 }
 
@@ -136,6 +136,15 @@ img{
     box-shadow: 2px 2px 2px #888888;
 }
 
+#logocont{
+    height: 250px;
+    width: 100%;
+}
+
+#logo{
+    max-height: 100%;
+    width: auto;
+}
 
 
 

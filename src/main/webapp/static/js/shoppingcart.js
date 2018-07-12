@@ -47,6 +47,7 @@ function ccPay() {
         $.ajax({
             url:"/creditcard_payment",
             method: "POST",
+
             data: {
                 cardnumber: ccnum,
                 holdername: ccholder,
@@ -54,8 +55,13 @@ function ccPay() {
                 expirydare: expirydate,
                 message: "eddki:D"
             },
-            success: window.location.replace("localhost:8080")
-        })
+            success: function(){
+                window.location.href = "/";
+            }
+        });
+
+
+
     })
 }
 
@@ -109,7 +115,10 @@ function sendCheckout() {
                 console.log(resp)
                 $("#checkouttoggle").prop("disabled", true);
                 $("#paytoggle").prop("disabled", false);
+                $(".inc").prop("disabled", true);
+                $(".dec").prop("disabled", true);
                 $("#checkout").slideToggle();
+
             }
             }
         })

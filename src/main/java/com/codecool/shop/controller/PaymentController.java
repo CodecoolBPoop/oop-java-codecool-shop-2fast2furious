@@ -9,6 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import sun.misc.IOUtils;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,6 +34,13 @@ public class PaymentController extends HttpServlet {
 
         boolean result = PaymentProcess.payment(order, cardNumber, holderName, cvcNumber, expiryDate);
         System.out.println(order.getStatus());
+
+        /*resp.setContentType("text/plain");
+        resp.setCharacterEncoding("UTF-8");
+        resp.getWriter().write("ok");*/
+
+        //resp.sendRedirect("/index");
+        Order.reinitializeOrder();
 
     }
 

@@ -23,6 +23,9 @@ public class Order {
         return instance;
     }
 
+    public static void reinitializeOrder(){
+        instance = null;
+    }
 
     public void setUser(User user) {
         this.user = user;

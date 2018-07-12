@@ -10,6 +10,7 @@ import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.model.Order;
+import com.codecool.shop.model.Status;
 import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -23,7 +24,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(urlPatterns = {"/"})
+@WebServlet(urlPatterns = {"/", "/index"})
 public class ProductController extends HttpServlet {
 
     @Override
@@ -38,6 +39,10 @@ public class ProductController extends HttpServlet {
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
         Order order = Order.getInstance();
+        String orderStatus = "NOT NEW";
+        if(order.getStatus() == Status.NEW){
+            orderStatus = "NEW";
+        }
 
 //        Map params = new HashMap<>();
 //        params.put("category", productCategoryDataStore.find(1));
@@ -53,6 +58,7 @@ public class ProductController extends HttpServlet {
         context.setVariable("allProdCat", productCategoryDataStore.getAll());
         context.setVariable("allSupp", supplierDataStore.getAll());
         context.setVariable("products", productDataStore.getBy(category, supplier));
+        context.setVariable("isNew", orderStatus);
         engine.process("product/index.html", context, resp.getWriter());
     }
 
