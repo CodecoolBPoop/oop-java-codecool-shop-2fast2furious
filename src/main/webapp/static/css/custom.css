@@ -86,7 +86,7 @@
 }
 
 #shoppingcarticon::after{
-    content: "0";
+    content: attr(data-content);
     color: white;
     position: relative;
     top:10px;
