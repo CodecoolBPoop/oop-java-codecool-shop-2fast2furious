@@ -87,6 +87,14 @@ public class Order {
         this.payment = payment;
     }
 
-    public User getUser() { return user; }
+
+    public int getNumberOfOrdered() {
+        int summa = 0;
+        for (OrderedProduct pr : shoppingCart) {
+            summa += pr.getQuantity();
+        }
+        return summa;
+    }
+
 
 }
