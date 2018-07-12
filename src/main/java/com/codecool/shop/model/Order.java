@@ -96,5 +96,9 @@ public class Order {
         return summa;
     }
 
+    public User getUser() { return user; }
+
+    public Payment getPayment() { return this.payment; }
+
 
 }

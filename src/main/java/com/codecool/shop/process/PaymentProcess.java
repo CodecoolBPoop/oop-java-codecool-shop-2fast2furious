@@ -5,16 +5,12 @@ import org.json.JSONObject;
 
 public class PaymentProcess {
 
-    public static boolean payment(Order order, JSONObject cardData) {
+    public static boolean payment(Order order, String cardNumber, String holderName, Integer cvcNumber, String expiryDate) {
 
-        if (cardData.getString("type").equals("cc")) {
-            order.setCardData(new CreditCardPayment(cardData.getString("cardnumber"),
-                                                    cardData.getString("holdername"),
-                                                    Integer.parseInt(cardData.getString("cvcnumber")),
-                                                    cardData.getString("expirydate")));
-        }
+        order.setCardData(new CreditCardPayment(cardNumber, holderName, cvcNumber, expiryDate));
 
         order.setStatus(Status.PAID);
+        SendEmail.sendEmail(order);
         return true;
     }
 

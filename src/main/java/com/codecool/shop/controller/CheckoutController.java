@@ -2,8 +2,11 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
-import com.codecool.shop.model.*;
-import com.codecool.shop.process.PaymentProcess;
+import com.codecool.shop.model.Address;
+import com.codecool.shop.model.Order;
+import com.codecool.shop.model.Product;
+import com.codecool.shop.model.User;
+import com.codecool.shop.process.CheckoutProcess;
 import org.json.HTTP;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,18 +21,21 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(urlPatterns = {"/creditcard_payment"})
-public class Payment extends HttpServlet {
+@WebServlet(urlPatterns = {"/checkout"})
+public class CheckoutController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        JSONObject cardData = new JSONObject(req);
-
+        String name = req.getParameter("name");
+        String phoneNumber = req.getParameter("phonenumber");
+        String email = req.getParameter("email");
+        JSONObject baddress = new JSONObject(req.getParameter("baddress"));
+        JSONObject saddress = new JSONObject(req.getParameter("saddress"));
 
         Order order = Order.getInstance();
 
-        boolean result = PaymentProcess.payment(order, cardData);
+        boolean result = CheckoutProcess.checkout(order, name, phoneNumber, email, baddress, saddress);
 
     }
 

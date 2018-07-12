@@ -2,11 +2,8 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
-import com.codecool.shop.model.Address;
-import com.codecool.shop.model.Order;
-import com.codecool.shop.model.Product;
-import com.codecool.shop.model.User;
-import com.codecool.shop.process.CheckoutProcess;
+import com.codecool.shop.model.*;
+import com.codecool.shop.process.PaymentProcess;
 import org.json.HTTP;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,22 +18,21 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(urlPatterns = {"/checkout"})
-public class Checkout extends HttpServlet {
+@WebServlet(urlPatterns = {"/creditcard_payment"})
+public class PaymentController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String name = req.getParameter("name");
-        String phoneNumber = req.getParameter("phonenumber");
-        String email = req.getParameter("email");
-        JSONObject baddress = new JSONObject(req.getParameter("baddress"));
-        JSONObject saddress = new JSONObject(req.getParameter("saddress"));
-
+        String cardNumber = req.getParameter("cardnumber");
+        String holderName = req.getParameter("holdername");
+        Integer cvcNumber = Integer.parseInt(req.getParameter("cvcnumber"));
+        String expiryDate = req.getParameter("expirydate");
 
         Order order = Order.getInstance();
 
-        boolean result = CheckoutProcess.checkout(order, name, phoneNumber, email, baddress, saddress);
+        boolean result = PaymentProcess.payment(order, cardNumber, holderName, cvcNumber, expiryDate);
+        System.out.println(order.getStatus());
 
     }
 

@@ -10,7 +10,6 @@ public class CheckoutProcess {
         user.setUserDataForCheckout(name, phoneNumber, email, Address.parseToAddress(saddress), Address.parseToAddress(baddress));
         order.setUser(user);
         order.setStatus(Status.CHECKED_OUT);
-        SendEmail.sendEmail(order);
         return true;
     }
 

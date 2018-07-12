@@ -27,7 +27,6 @@ public class AddToCart extends HttpServlet {
         if (order.getStatus() == Status.NEW) {
             Product product = productDataStore.find(productId);
             order.addProduct(product);
-            System.out.println(order.toString());
 
             resp.setContentType("text/plain");
             resp.setCharacterEncoding("UTF-8");

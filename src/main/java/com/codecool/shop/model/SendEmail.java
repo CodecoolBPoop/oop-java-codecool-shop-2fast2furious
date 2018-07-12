@@ -28,14 +28,20 @@ public class SendEmail {
         return "<h3>Dear " + order.getUser().getName() + "!</h3><br>\n" +
                 "<p>Your purchase is successfully administrated!</p>\n" +
                 "<h4>Ordered items:</h4>\n" +
-                productsToList(order.getShoppingCart()) + "\n" ;
+                productsToList(order.getShoppingCart()) + "\n" +
+                "<strong>Total price: " + order.getTotal() + "</strong><br>\n" +
+                "<p>Shipping address: </p>\n" +
+                "<p>Country:" + order.getUser().getShippingAddress().getCountry() + "</p>\n" +
+                "<p>City:" + order.getUser().getShippingAddress().getCity() + "</p>\n" +
+                "<p>ZIP code:" + order.getUser().getShippingAddress().getZipCode() + "</p>\n" +
+                "<br><p>Thanks for shopping!</p>";
     }
 
     public static void sendEmail(Order order) {
 
         String from = "2fast2furiouswebshop";
         String pass = "fastfurious";
-        String[] to = { "ide köll a cím" }; // list of recipient email addresses
+        String[] to = { "brunnerm7@gmail.com" }; // list of recipient email addresses
         String subject = "Ride or die!";
         String body = buildBody(order);
 

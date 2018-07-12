@@ -37,6 +37,28 @@ function decrementButtonListener() {
     })
 }
 
+function ccPay() {
+    $("#ccsend").click(function (event) {
+        let ccnum = $("#ccnum").val()
+        let ccholder = $("#ccholder").val()
+        let cvcnum = $("#cvc").val()
+        let expirydate = $("#expdate").val()
+
+        $.ajax({
+            url:"/creditcard_payment",
+            method: "POST",
+            data: {
+                cardnumber: ccnum,
+                holdername: ccholder,
+                cvcnumber: cvcnum,
+                expirydare: expirydate,
+                message: "eddki:D"
+            },
+            success: window.location.replace("localhost:8080")
+        })
+    })
+}
+
 function sendCheckout() {
     $("#checkoutsend").click(function (event) {
         event.preventDefault();
@@ -131,6 +153,7 @@ function main() {
     payToggle();
     payPalButton();
     ccButton();
+    ccPay();
 
 }
 
