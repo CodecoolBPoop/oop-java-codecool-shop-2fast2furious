@@ -9,6 +9,7 @@ import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.model.Order;
 import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -36,6 +37,7 @@ public class ProductController extends HttpServlet {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
+        Order order = Order.getInstance();
 
 //        Map params = new HashMap<>();
 //        params.put("category", productCategoryDataStore.find(1));
@@ -47,6 +49,7 @@ public class ProductController extends HttpServlet {
         context.setVariable("recipient", "World");
         context.setVariable("selectedCategory", category);
         context.setVariable("selectedSupplier", supplier);
+        context.setVariable("sizeOfCart", order.getNumberOfOrdered());
         context.setVariable("allProdCat", productCategoryDataStore.getAll());
         context.setVariable("allSupp", supplierDataStore.getAll());
         context.setVariable("products", productDataStore.getBy(category, supplier));
