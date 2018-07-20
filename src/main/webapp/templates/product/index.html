@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="author" content="Codecool" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="google-signin-client_id" content="798833548913-bsa8as7s7ur1s0k2to1ruqlb73iaom46.apps.googleusercontent.comf">
 
     <title>Codecool Shop</title>
 
@@ -28,12 +29,16 @@
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
     <script src="static/js/cart.js" defer></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
 </head>
 
 <body>
 
 <div class="jumbotron text-center">
     <h1>Codecool Shop</h1>
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    <p id="user-name-label"></p>
 </div>
 
 <div class="container">

@@ -1,4 +1,12 @@
 
+function onSignIn(googleUser) {
+    console.log("123");
+    alert(123);
+    let profile=googleUser.getBasicProfile();
+    $("#user-name-label").text(profile.getEmail());
+}
+
+
 function initCounter() {
     let size = $("#shoppingcartlink").attr('value');
     $("#shoppingcarticon").attr('data-content', size);
@@ -20,6 +28,7 @@ function addToCartListener() {
         }
     )
 }
+
 
 function main() {
     addToCartListener();
