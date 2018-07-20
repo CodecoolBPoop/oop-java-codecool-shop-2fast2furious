@@ -6,6 +6,13 @@ function onSignIn(googleUser) {
     $("#user-name-label").text(profile.getEmail());
     let id_token = googleUser.getAuthResponse().id_token;
     console.log("ID Token: " + id_token);
+    $.ajax({
+        url:"/gmail-login",
+        method: "POST",
+        data: {
+            idToken: id_token,
+        }
+    })
 }
 
 
