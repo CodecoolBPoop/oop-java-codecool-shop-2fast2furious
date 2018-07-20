@@ -4,6 +4,8 @@ function onSignIn(googleUser) {
     alert(123);
     let profile=googleUser.getBasicProfile();
     $("#user-name-label").text(profile.getEmail());
+    let id_token = googleUser.getAuthResponse().id_token;
+    console.log("ID Token: " + id_token);
 }
 
 
