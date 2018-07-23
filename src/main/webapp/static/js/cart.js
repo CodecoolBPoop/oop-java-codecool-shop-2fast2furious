@@ -1,9 +1,10 @@
 
 function onSignIn(googleUser) {
-    console.log("123");
-    alert(123);
+    $("#navbar-login").hide();
+    $("#navbar-logout-google").show();
+    $('#loginModal').modal('hide');
     let profile=googleUser.getBasicProfile();
-    $("#user-name-label").text(profile.getEmail());
+    $("#navbar-logout-google .user-name-label").html('Welcome, ' + profile.getName());
     let id_token = googleUser.getAuthResponse().id_token;
     console.log("ID Token: " + id_token);
     $.ajax({
@@ -15,7 +16,9 @@ function onSignIn(googleUser) {
     })
 }
 
-function signOut() {
+function signOutGoogle() {
+    $("#navbar-login").show();
+    $("#navbar-logout-google").hide();
     let auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
         console.log('User signed out.');
@@ -55,3 +58,4 @@ function main() {
 $(document).ready(function () {
     main();
 })
+

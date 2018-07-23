@@ -9,118 +9,152 @@
 <nav class="navbar navbar-expand-lg bg-primary" th:fragment="navbar">
     <div class="container">
         <div class="navbar-translate">
-            <a class="navbar-brand" href="#pablo">Primary color</a>
+            <a class="card-title" href="">2FAST2FURIOUS </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#example-navbar-primary" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-bar bar1"></span>
                 <span class="navbar-toggler-bar bar2"></span>
                 <span class="navbar-toggler-bar bar3"></span>
             </button>
         </div>
-        <div class="collapse navbar-collapse" id="example-navbar-primary">
+        <div id="navbar-login" style="display: block;">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#pablo">
-                        <i class="now-ui-icons objects_globe"></i>
-                        <p>Discover</p>
-                    </a>
+                <li class="nav-item">
+                    <button class="btn btn-primary btn-round" onclick="openRegisterModal();">
+                        <p>Log In</p>
+                    </button>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#pablo">
-                        <i class="now-ui-icons users_circle-08"></i>
-                        <p>Profile</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#pablo">
-                        <i class="now-ui-icons ui-1_settings-gear-63"></i>
-                        <p>Settings</p>
-                    </a>
+                    <buttton class="btn btn-primary btn-round" onClick="openRegisterModal(); $('#loginbox').hide(); $('#signupbox').show()">
+                        <p>Register</p>
+                    </buttton>
                 </li>
             </ul>
+        </div>
+        <div id="navbar-logout-basic" style="display: none;">
+            <p class="user-name-label"></p>
+            <button href="#" onClick="signOutBasic();">Sign out</button>
+        </div>
+        <div id="navbar-logout-google" style="display: none;">
+            <p class="user-name-label"></p>
+            <button class="btn btn-primary btn-round" href="#" onclick="signOutGoogle();">Sign out</button>
         </div>
     </div>
 </nav>
 
+
 <div class="modal fade login" id="loginModal" th:fragment="loginmodal">
     <div class="modal-dialog login animated">
         <div class="modal-content">
-            <div class="registration-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Login with</h4>
-            </div>
-            <div class="modal-body">
-                <div class="box">
-                    <div class="content">
-                        <div class="social">
-                            <a class="circle github" href="#">
-                                <i class="fab fa-github"></i></i>
-                            </a>
-                            <a id="google_login" class="circle google" href="#">
-                                <i class="fab fa-google"></i>
-                            </a>
-                            <a id="facebook_login" class="circle facebook" href="#">
-                                <i class="fab fa-facebook"></i>
-                            </a>
+            <div class="container">
+                <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-12 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                    <div class="panel panel-info" >
+                        <div class="panel-heading">
+                            <div class="panel-title">Sign In</div>
                         </div>
-                        <div class="division">
-                            <div class="line l"></div>
-                            <span>or</span>
-                            <div class="line r"></div>
-                        </div>
-                        <div class="error"></div>
-                        <div class="form loginBox">
-                            <form id="formocska" method="POST" action="" accept-charset="UTF-8">
-                                <input id="id_username" name="username" class="form-control" type="text"
-                                       placeholder="Felhasználónév">
-                                <input id="id_password" name="password" class="form-control" type="password"
-                                       placeholder="Jelszó">
-                                <div class="input-group form-group-no-border input-lg">
-                                    <p>A felhasználónév és jelszó nem egyezik. Kérlek próbáld meg újra!</p>
+
+                        <div style="padding-top:30px" class="panel-body" >
+
+                            <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+
+                            <form id="loginform" class="form-horizontal" role="form">
+
+                                <div style="margin-bottom: 25px" class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                    <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="username or email">
                                 </div>
-                                <div class="input-group form-group-no-border input-lg">
-                                    <p>Your account doesn't have access to this page. To proceed,
-                                        please login with an account that has access.</p>
+
+                                <div style="margin-bottom: 25px" class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                    <input id="login-password" type="password" class="form-control" name="password" placeholder="password">
                                 </div>
-                                <div class="input-group form-group-no-border input-lg">
-                                    <p>Please login to see this page.</p>
+
+
+                                <div style="margin-top:10px" class="form-group">
+                                    <!-- Button -->
+
+                                    <div class="col-sm-12 controls">
+                                        <a id="btn-login" href="#" class="col-sm-6 btn btn-success">Login  </a>
+                                        <div id="btn-googlelogin"></div>
+                                        <script>
+                                            function renderButton() {
+                                                gapi.signin2.render('btn-googlelogin', {
+                                                    'scope': 'profile email',
+                                                    'longtitle': true,
+                                                    'width': 206,
+                                                    'theme': 'dark',
+                                                    'onsuccess': onSignIn
+                                                });
+                                            }
+                                        </script>
+                                        <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+                                    </div>
                                 </div>
-                                <input type="hidden" name="next" value="{{ next }}"/>
-                                <button class="btn btn-default btn-login" type="submit" value="Bejelentkezés">BEJELENTKEZÉS</button>
+
+
+                                <div class="form-group">
+                                    <div class="col-md-12 control">
+                                        <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
+                                            Don't have an account!
+                                            <a href="#" onClick="$('#loginbox').hide(); $('#signupbox').show()">
+                                                Sign Up Here
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
                             </form>
+
+
                         </div>
                     </div>
                 </div>
-                <div class="box">
-                    <div class="content registerBox" style="display:none;">
-                        <div class="form">
-                            <form method="" html="" data-remote="true" action=""
-                                  accept-charset="UTF-8">
-                                <input id="email" class="form-control" type="text" placeholder="Email" name="email">
-                                <input id="password" class="form-control" type="password" placeholder="Password"
-                                       name="password">
-                                <input id="password_confirmation" class="form-control" type="password"
-                                       placeholder="Repeat Password" name="password_confirmation">
-                                <input class="btn btn-default btn-register" type="button" value="Create account"
-                                       name="commit">
+
+                <div id="signupbox" style="display:none; margin-top:50px" class="mainbox col-md-12 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="panel-title">Sign Up</div>
+                            <div style="float:right; font-size: 100%; position: relative; top:-10px"><a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Sign In</a></div>
+                        </div>
+                        <div class="panel-body" >
+                            <form id="signupform" class="form-horizontal" role="form">
+
+
+                                <div class="input-group">
+                                    <label class="col-md-12 control-label">Email</label>
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" name="email" placeholder="Email Address">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-12 control-label">Username</label>
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" name="firstname" placeholder="Username">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12 control-label">Password</label>
+                                    <div class="col-md-12">
+                                        <input type="password" class="form-control" name="passwd" placeholder="Password">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <!-- Button -->
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <button id="btn-signup" type="button" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Sign Up</button>
+                                    </div>
+                                </div>
+
                             </form>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <div class="forgot login-footer">
-                            <span>Looking to
-                                 <a href="javascript: showRegisterForm();">create an account</a>
-                            ?</span>
-                </div>
-                <div class="forgot register-footer" style="display:none">
-                    <span>Already have an account?</span>
-                    <a href="javascript: showLoginForm();">Login</a>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 
 </body>
 </html>
