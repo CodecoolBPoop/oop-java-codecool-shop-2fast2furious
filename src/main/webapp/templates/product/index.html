@@ -10,6 +10,8 @@
 
     <div th:replace="product/navbar.html :: navbar">
     </div>
+    <div th:replace="product/navbar.html :: loginmodal">
+    </div>
 
 <div class="jumbotron text-center">
     <h1>Codecool Shop</h1>
@@ -19,6 +21,11 @@
 </div>
 
 <div class="container">
+
+    <a class="btn btn-success btn-block btn-lg" data-toggle="modal"
+       href="javascript:void(0)"
+       onclick="openRegisterModal();">LOGIN</a>
+
 
     <span id="filterby">Filter by </span>
     <form method="GET" class="form-inline">

@@ -1,47 +1,4 @@
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>NAVBAR</title>
-</head>
-<body>
-
-<nav class="navbar navbar-expand-lg bg-primary" th:fragment="navbar">
-    <div class="container">
-        <div class="navbar-translate">
-            <a class="navbar-brand" href="#pablo">Primary color</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#example-navbar-primary" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-bar bar1"></span>
-                <span class="navbar-toggler-bar bar2"></span>
-                <span class="navbar-toggler-bar bar3"></span>
-            </button>
-        </div>
-        <div class="collapse navbar-collapse" id="example-navbar-primary">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#pablo">
-                        <i class="now-ui-icons objects_globe"></i>
-                        <p>Discover</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#pablo">
-                        <i class="now-ui-icons users_circle-08"></i>
-                        <p>Profile</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#pablo">
-                        <i class="now-ui-icons ui-1_settings-gear-63"></i>
-                        <p>Settings</p>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
-<div class="modal fade login" id="loginModal" th:fragment="loginmodal">
+<div class="modal fade login" id="loginModal">
     <div class="modal-dialog login animated">
         <div class="modal-content">
             <div class="registration-header">
@@ -69,21 +26,30 @@
                         </div>
                         <div class="error"></div>
                         <div class="form loginBox">
-                            <form id="formocska" method="POST" action="" accept-charset="UTF-8">
+                            <form id="formocska" method="POST" action="{% url 'login' %}" accept-charset="UTF-8">
+                                {% csrf_token %}
                                 <input id="id_username" name="username" class="form-control" type="text"
-                                       placeholder="Felhasználónév">
+                                       placeholder="Felhasználónév" name="email">
                                 <input id="id_password" name="password" class="form-control" type="password"
-                                       placeholder="Jelszó">
-                                <div class="input-group form-group-no-border input-lg">
-                                    <p>A felhasználónév és jelszó nem egyezik. Kérlek próbáld meg újra!</p>
-                                </div>
-                                <div class="input-group form-group-no-border input-lg">
-                                    <p>Your account doesn't have access to this page. To proceed,
-                                        please login with an account that has access.</p>
-                                </div>
-                                <div class="input-group form-group-no-border input-lg">
-                                    <p>Please login to see this page.</p>
-                                </div>
+                                       placeholder="Jelszó"
+                                       name="password">
+                                {% if form.errors %}
+                                    <div class="input-group form-group-no-border input-lg">
+                                        <p>A felhasználónév és jelszó nem egyezik. Kérlek próbáld meg újra!</p>
+                                    </div>
+                                {% endif %}
+                                {% if next %}
+                                    {% if user.is_authenticated %}
+                                        <div class="input-group form-group-no-border input-lg">
+                                            <p>Your account doesn't have access to this page. To proceed,
+                                                please login with an account that has access.</p>
+                                        </div>
+                                    {% else %}
+                                        <div class="input-group form-group-no-border input-lg">
+                                            <p>Please login to see this page.</p>
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
                                 <input type="hidden" name="next" value="{{ next }}"/>
                                 <button class="btn btn-default btn-login" type="submit" value="Bejelentkezés">BEJELENTKEZÉS</button>
                             </form>
@@ -93,7 +59,7 @@
                 <div class="box">
                     <div class="content registerBox" style="display:none;">
                         <div class="form">
-                            <form method="" html="" data-remote="true" action=""
+                            <form method="" html="{:multipart=>true}" data-remote="true" action=""
                                   accept-charset="UTF-8">
                                 <input id="email" class="form-control" type="text" placeholder="Email" name="email">
                                 <input id="password" class="form-control" type="password" placeholder="Password"
@@ -121,6 +87,3 @@
         </div>
     </div>
 </div>
-
-</body>
-</html>
