@@ -87,6 +87,9 @@ function signUp() {
     if (email === "" || username === "" || password === "") {
         $("#signup-alert").show();
         $("#signup-alert").text("Wrong input!");
+    } else if (!$("#check-terms").prop('checked')) {
+        $("#signup-alert").show();
+        $("#signup-alert").text("You have to accept Terms and agreement!");
     } else {
         $.ajax({
             url: "/signup",
