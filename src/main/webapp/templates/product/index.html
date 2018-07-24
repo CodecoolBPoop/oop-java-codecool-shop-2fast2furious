@@ -1,8 +1,27 @@
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <div th:replace="product/meta.html :: upper">
-    </div>
+    <meta charset="utf-8"/>
+    <meta name="author" content="Codecool"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="google-signin-client_id"
+          content="798833548913-bsa8as7s7ur1s0k2to1ruqlb73iaom46.apps.googleusercontent.com">
+
+    <title>Codecool Shop</title>
+    <script src="static/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+          integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <script src="static/js/cart.js" defer></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+    <link href="static/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="static/css/now-ui-kit.css?v=1.2.0" rel="stylesheet"/>
+    <link href="static/css/demo.css" rel="stylesheet"/>
+    <link href="static/css/snackbar.css" rel="stylesheet"/>
+    <script src="static/js/login-register.js" defer></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 
 </head>
 
@@ -13,19 +32,11 @@
     <div th:replace="product/navbar.html :: loginmodal">
     </div>
 
-<div class="jumbotron text-center">
-    <h1>Codecool Shop</h1>
-    <div class="g-signin2" data-onsuccess="onSignIn"></div>
-    <p id="user-name-label"></p>
-    <a href="#" onclick="signOut();">Sign out</a>
-</div>
+
 
 <div class="container">
 
-    <a class="btn btn-success btn-block btn-lg" data-toggle="modal"
-       href="javascript:void(0)"
-       onclick="openRegisterModal();">LOGIN</a>
-
+    <div id="snackbar">You logged in!</div>
 
     <span id="filterby">Filter by </span>
     <form method="GET" class="form-inline">
@@ -87,8 +98,6 @@
 <script src="static/js/plugins/bootstrap-tagsinput.js"></script>
 <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
 <script src="static/js/plugins/bootstrap-selectpicker.js" type="text/javascript"></script>
-<!--  Google Maps Plugin    -->
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 <!--	Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
 <script src="static/js/plugins/jasny-bootstrap.min.js"></script>
 <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->

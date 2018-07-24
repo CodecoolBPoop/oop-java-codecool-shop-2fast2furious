@@ -10,29 +10,25 @@
     <div class="container">
         <div class="navbar-translate">
             <a class="card-title" href="">2FAST2FURIOUS </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#example-navbar-primary" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-bar bar1"></span>
-                <span class="navbar-toggler-bar bar2"></span>
-                <span class="navbar-toggler-bar bar3"></span>
-            </button>
         </div>
+
         <div id="navbar-login" style="display: block;">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <button class="btn btn-primary btn-round" onclick="openRegisterModal();">
+                    <button class="btn btn-primary btn-round" onclick="openRegisterModal(); $('#signupbox').hide(); $('#loginbox').show()">
                         <p>Log In</p>
                     </button>
                 </li>
                 <li class="nav-item">
-                    <buttton class="btn btn-primary btn-round" onClick="openRegisterModal(); $('#loginbox').hide(); $('#signupbox').show()">
+                    <button class="btn btn-primary btn-round" onClick="openRegisterModal(); $('#loginbox').hide(); $('#signupbox').show()">
                         <p>Register</p>
-                    </buttton>
+                    </button>
                 </li>
             </ul>
         </div>
         <div id="navbar-logout-basic" style="display: none;">
             <p class="user-name-label"></p>
-            <button href="#" onClick="signOutBasic();">Sign out</button>
+            <button class="btn btn-primary btn-round" href="#" onClick="signOutBasic();">Sign out</button>
         </div>
         <div id="navbar-logout-google" style="display: none;">
             <p class="user-name-label"></p>
@@ -56,7 +52,7 @@
 
                             <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
 
-                            <form id="loginform" class="form-horizontal" role="form">
+                            <div id="loginform">
 
                                 <div style="margin-bottom: 25px" class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -73,7 +69,7 @@
                                     <!-- Button -->
 
                                     <div class="col-sm-12 controls">
-                                        <a id="btn-login" href="#" class="col-sm-6 btn btn-success">Login  </a>
+                                        <button id="btn-login" href="#" class="col-sm-6 btn btn-success">Login  </button>
                                         <div id="btn-googlelogin"></div>
                                         <script>
                                             function renderButton() {
@@ -95,13 +91,13 @@
                                     <div class="col-md-12 control">
                                         <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
                                             Don't have an account!
-                                            <a href="#" onClick="$('#loginbox').hide(); $('#signupbox').show()">
+                                            <a href="#" onClick="flipToRegister()">
                                                 Sign Up Here
                                             </a>
                                         </div>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
 
 
                         </div>
@@ -112,29 +108,32 @@
                     <div class="panel panel-info">
                         <div class="panel-heading">
                             <div class="panel-title">Sign Up</div>
-                            <div style="float:right; font-size: 100%; position: relative; top:-10px"><a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Sign In</a></div>
+                            <div style="float:right; font-size: 100%; position: relative; top:-20px"><a id="signinlink" href="#" onclick="flipToLogin()">Sign In</a></div>
                         </div>
                         <div class="panel-body" >
+
+                            <div style="display:none" id="signup-alert" class="alert alert-danger col-sm-12"></div>
+
                             <form id="signupform" class="form-horizontal" role="form">
 
 
                                 <div class="input-group">
                                     <label class="col-md-12 control-label">Email</label>
                                     <div class="col-md-12">
-                                        <input type="text" class="form-control" name="email" placeholder="Email Address">
+                                        <input id="signup-email" type="text" class="form-control" name="email" placeholder="Email Address">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-md-12 control-label">Username</label>
                                     <div class="col-md-12">
-                                        <input type="text" class="form-control" name="firstname" placeholder="Username">
+                                        <input id="signup-username" type="text" class="form-control" name="firstname" placeholder="Username">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12 control-label">Password</label>
                                     <div class="col-md-12">
-                                        <input type="password" class="form-control" name="passwd" placeholder="Password">
+                                        <input id="signup-password" type="password" class="form-control" name="passwd" placeholder="Password">
                                     </div>
                                 </div>
 

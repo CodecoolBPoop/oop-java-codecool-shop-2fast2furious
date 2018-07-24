@@ -8,7 +8,23 @@ function showRegisterForm() {
         $('.modal-title').html('Regisztráció');
     });
     $('.error').removeClass('alert alert-danger').html('');
+}
 
+function flipToRegister() {
+    $("#signup-alert").hide();
+    $("#signup-password").val("");
+    $("#signup-email").val("");
+    $("#signup-username").val("");
+    $("#loginbox").hide();
+    $("#signupbox").show();
+}
+
+function flipToLogin() {
+    $("#login-alert").hide();
+    $("#login-password").val("");
+    $("#login-username").val("");
+    $("#signupbox").hide();
+    $("#loginbox").show();
 }
 
 function showLoginForm() {
@@ -33,6 +49,8 @@ function openLoginModal() {
 
 function openRegisterModal() {
     showRegisterForm();
+    $("#login-alert").hide();
+    $("#signup-alert").hide();
     setTimeout(function () {
         $('#loginModal').modal('show');
     }, 230);
