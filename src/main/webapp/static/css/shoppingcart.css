@@ -1,0 +1,69 @@
+h1{
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+thead{
+
+
+}
+
+#thead{
+    border-style: solid;
+    border-radius: 1%;
+    border-color: #428bca;
+    background-color: #428bca;
+    margin-bottom: 200px;
+}
+
+#buttoncont{
+    text-align: right;
+}
+
+#checkoutform{
+    width: 60%;
+}
+
+#checkout{
+    align-items: center;
+    display: none;
+}
+
+.form-control{
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.address{
+
+    display: inline;
+
+}
+
+.col{
+    width: 31%;
+    display: inline-block;
+    margin-right: 13px;
+}
+
+.form-row{
+    margin-left: 10px;
+}
+
+.alert{
+    margin-top: 20px;
+}
+
+#pay{
+    width: 60%;
+    display: none;
+}
+
+#cvc #expdate{
+    width: 30%;
+}
+
+#paypal{
+    text-align: center;
+    display: none;
+}
