@@ -10,7 +10,7 @@ import com.codecool.shop.process.CheckoutProcess;
 import org.json.HTTP;
 import org.json.JSONException;
 import org.json.JSONObject;
-import sun.misc.IOUtils;
+//import sun.misc.IOUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
