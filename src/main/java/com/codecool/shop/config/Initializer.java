@@ -3,9 +3,7 @@ package com.codecool.shop.config;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementation.ProductDaoMem;
-import com.codecool.shop.dao.implementation.SupplierDaoMem;
+import com.codecool.shop.dao.implementation.*;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
@@ -19,7 +17,7 @@ public class Initializer implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        ProductDao productDataStore = ProductDaoMem.getInstance();
+        /*ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
 
@@ -57,6 +55,17 @@ public class Initializer implements ServletContextListener {
         productDataStore.add(new Product("Dorman 910-109 Ford Fusion 17 inch Wheel Cover Hub Cap", 57.9f, "USD", "Designed to match the original and blend in with the overall design of your vehicle", wheel, dorman));
         productDataStore.add(new Product("BMW Genuine Hamann HM EVO 8.5\" x 20\" Wheel Set", 5499.9f, "USD", "For all BMW Models", wheel, euroActive));
         productDataStore.add(new Product("Hankook DynaPro ATM RF10 Off-Road Tire", 117, "USD", "Wraparound tread gives a rugged look and increases puncture resistance", tire, hankook));
+*/
+        ProductDao productDataStore = ProductDaoSQL.getInstance();
+        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoSQL.getInstance();
+        SupplierDao supplierDataStore = SupplierDaoSQL.getInstance();
+
+        productCategoryDataStore.getAll();
+        supplierDataStore.getAll();
+
+        System.out.println(productDataStore.getAll());
+
+
 
     }
 }

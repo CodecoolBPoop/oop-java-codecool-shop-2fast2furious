@@ -1,9 +1,12 @@
 package com.codecool.shop.dao;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Properties;
 
 public class Connector {
@@ -13,7 +16,18 @@ public class Connector {
     private static boolean queried=false;
 
     public static Connection getConnection(){
+        if(!queried){
+            getConfig();
+        }
 
+        Connection connection = null;
+        try {
+            connection = DriverManager.getConnection(url,dbname,dbpw);
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return connection;
     }
 
 
@@ -23,12 +37,10 @@ public class Connector {
 
         try {
 
-            input = new FileInputStream("resources/config.properties");
+            input = new FileInputStream("src/main/resources/config.properties");
 
-            // load a properties file
             prop.load(input);
 
-            // get the property value and print it out
             url = prop.getProperty("url");
             dbname = prop.getProperty("dbname");
             dbpw = prop.getProperty("dbpw");
