@@ -39,6 +39,7 @@ function onSignIn(googleUser) {
     $('#loginModal').modal('hide');
     let profile=googleUser.getBasicProfile();
     $("#navbar-logout-google .user-name-label").html('Welcome, ' + profile.getName());
+    $("#gmail-profile-image").attr("src", profile.getImageUrl());
     let id_token = googleUser.getAuthResponse().id_token;
     console.log("ID Token: " + id_token);
     $.ajax({
