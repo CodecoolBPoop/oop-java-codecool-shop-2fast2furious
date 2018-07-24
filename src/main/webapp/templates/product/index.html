@@ -27,65 +27,16 @@
 
 <body>
 
+    <div id="snackbar">You logged in!</div>
+
     <div th:replace="product/navbar.html :: navbar">
     </div>
     <div th:replace="product/navbar.html :: loginmodal">
     </div>
-
-
-
-<div class="container">
-
-    <div id="snackbar">You logged in!</div>
-
-    <span id="filterby">Filter by </span>
-    <form method="GET" class="form-inline">
-        <select name="category" class="form-control">
-            <option th:each="prodCat,iterStat : ${allProdCat}" th:text="${prodCat.getName()}"
-                    th:value="${prodCat.getName()}" th:selected="${prodCat.getName() == selectedCategory}">Default
-            </option>
-        </select>
-        <select name="supplier" class="form-control">
-            <option th:each="supp,iterStat : ${allSupp}" th:text="${supp.getName()}" th:value="${supp.getName()}"
-                    th:selected="${supp.getName() == selectedSupplier}">Default
-            </option>
-        </select>
-        <input type="submit" class="btn btn-success" id="filtersubmit">
-        <a href="/shopping_cart" id="shoppingcartlink" th:value="${sizeOfCart}"><i class="fas fa-shopping-cart"
-                                                                                   id="shoppingcarticon"></i></a>
-    </form>
-
-
-    <div class="well well-sm">
-        <strong th:text="${selectedCategory}">Category Title</strong>
+    <div th:replace="${page} :: content">
     </div>
 
-    <div id="products" class="row list-group">
-
-        <div class="item col-xs-4 col-lg-4" th:each="prod,iterStat : ${products}">
-            <div class="thumbnail">
-                <div class="imgcont"><img class="group list-group-image" src="http://placehold.it/400x250/000/fff"
-                                          th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt=""/></div>
-                <div class="caption">
-                    <h4 class="group inner list-group-item-heading" th:text="${prod.name}">Product name</h4>
-                    <p class="group inner list-group-item-text" th:text="${prod.description}">Product
-                        description... </p>
-                    <div class="row">
-                        <div class="col-xs-12 col-md-6">
-                            <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
-                        </div>
-                        <div class="col-xs-12 col-md-6">
-                            <a class="btn btn-success addtocart" th:attr="data-prodid=${prod.getId()}">Add to cart</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
-
-<div th:replace="footer.html :: copy"></div>
+    <div th:replace="footer.html :: copy"></div>
 
 </body>
 
