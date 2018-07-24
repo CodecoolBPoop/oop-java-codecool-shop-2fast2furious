@@ -34,9 +34,10 @@ public class ShoppingCart extends HttpServlet {
         Order order = Order.getInstance();
 
         context.setVariable("recipient", "World");
+        context.setVariable("page", "product/shoppingcart.html");
         context.setVariable("products", order.getShoppingCart());
         context.setVariable("total", order.getTotal());
-        engine.process("shoppingcart/shoppingcart.html", context, resp.getWriter());
+        engine.process("product/index.html", context, resp.getWriter());
     }
 
 }
