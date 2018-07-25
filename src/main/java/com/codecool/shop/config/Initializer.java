@@ -62,12 +62,15 @@ public class Initializer implements ServletContextListener {
         supplierDataStore.getAll();
         productDataStore.getAll();
 
+ProductCategory tire = new ProductCategory("Tire", "Tire", "Tires for cars");
+        Supplier yokohama = new Supplier("Yokohama", "Tires and wheels");
 
 
         Order testOrder = new Order("Tomibacsi");
+        testOrder.getShoppingCart().add(new OrderedProduct(new Product("BMW Genuine Hamann HM EVO 8.5\" x 20\" Wheel Set", 5499.9f, "USD", "For all BMW Models", tire, yokohama)));
 //        testOrder.TESTsaveOrderToDB();
 
         OrderDaoSQL daoSQL = OrderDaoSQL.getInstance();
-        daoSQL.uploadOrder(testOrder);
+        daoSQL.uploadOrderWithCart(testOrder);
     }
 }
