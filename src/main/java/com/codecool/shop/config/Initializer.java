@@ -7,6 +7,7 @@ import com.codecool.shop.dao.implementation.*;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
+import com.codecool.shop.model.User;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -62,8 +63,8 @@ public class Initializer implements ServletContextListener {
 
         productCategoryDataStore.getAll();
         supplierDataStore.getAll();
+        productDataStore.getAll();
 
-        System.out.println(productDataStore.getAll());
 
 
 

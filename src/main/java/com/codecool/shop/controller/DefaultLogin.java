@@ -1,6 +1,10 @@
 package com.codecool.shop.controller;
 
+<<<<<<< HEAD
 import com.codecool.shop.model.Order;
+=======
+import com.codecool.shop.model.User;
+>>>>>>> 6f0e1112a7ee2085e73bda03cd72398327e7a76d
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,13 +22,19 @@ public class DefaultLogin extends HttpServlet {
 
         resp.setContentType("text/plain");
         resp.setCharacterEncoding("UTF-8");
-        resp.getWriter().write("success");
 
-        HttpSession session = req.getSession(false);
-        if(session == null){
-            session = req.getSession(true);
+        String email = req.getParameter("email");
+        String password = req.getParameter("password");
+        String message;
+        boolean success = User.validatePwAndEmail(password,email);
+
+        if(!success){
+            message = "Username or password invalid";
+        }else{
+            message = "success";
         }
-        session.setAttribute("email", "asdf");
+
+        resp.getWriter().write(message);
 
     }
 
