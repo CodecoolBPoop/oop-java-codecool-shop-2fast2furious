@@ -29,14 +29,19 @@ public class ShoppingCart extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        System.out.println("asdf");
+
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
         Order order = Order.getInstance();
+
+        System.out.println("asdf");
 
         context.setVariable("recipient", "World");
         context.setVariable("page", "product/shoppingcart.html");
         context.setVariable("products", order.getShoppingCart());
         context.setVariable("total", order.getTotal());
+        System.out.println(order.getTotal());
         engine.process("product/index.html", context, resp.getWriter());
     }
 

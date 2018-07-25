@@ -99,7 +99,6 @@ function signUp() {
             success: function(resp) {
                 if (resp === "success") {
                     validSignUp();
-                    alert("success");
                 } else {
                     $("#signup-alert").show();
                     $("#signup-alert").text(resp);
