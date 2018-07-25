@@ -140,7 +140,7 @@ public class OrderDaoSQL {
             try {
                 statement = connection.prepareStatement("INSERT INTO shopping_cart (product, price, order_id) VALUES (?,?,?);");
                 statement.setString(1, ordered.getName());
-                statement.setString(2, String.valueOf(ordered.getQuantity());
+                statement.setString(2, String.valueOf(ordered.getQuantity()));
                 statement.setString(3, String.valueOf(generatedKey));
                 statement.executeUpdate();
                 System.out.println("Cart saved");
