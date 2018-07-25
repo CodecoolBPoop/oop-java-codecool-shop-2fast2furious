@@ -31,6 +31,7 @@
 <body>
 
     <div id="snackbar"></div>
+    <div id="logged-in-email" th:value="${session.email}"></div>
 
     <div th:replace="product/navbar.html :: navbar">
     </div>

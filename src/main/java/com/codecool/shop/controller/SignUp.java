@@ -16,7 +16,9 @@ public class SignUp extends HttpServlet {
 
         resp.setContentType("text/plain");
         resp.setCharacterEncoding("UTF-8");
-        resp.getWriter().write("fail");
+        resp.getWriter().write("success");
+
+
 
     }
 
