@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg bg-primary" th:fragment="navbar" style="padding: 0;">
+<nav class="navbar navbar-expand-lg bg-primary fixed-top" th:fragment="navbar" style="padding: 0;">
     <div class="container">
         <div class="navbar-translate">
             <a class="card-title" href="" style="font-size: large">2FAST2FURIOUS </a>
@@ -50,7 +50,7 @@
                 <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-12 col-md-offset-3 col-sm-8 col-sm-offset-2">
                     <div class="panel panel-info" >
                         <div class="panel-heading">
-                            <div class="panel-title">Sign In</div>
+                            <h3 style="margin: 0px">Sign In</h3>
                         </div>
 
                         <div style="padding-top:30px" class="panel-body" >
@@ -113,12 +113,12 @@
                 <div id="signupbox" style="display:none; margin-top:50px" class="mainbox col-md-12 col-md-offset-3 col-sm-8 col-sm-offset-2">
                     <div class="panel panel-info">
                         <div class="panel-heading">
-                            <div class="panel-title">Sign Up</div>
-                            <div style="float:right; font-size: 100%; position: relative; top:-20px"><a id="signinlink" href="#" onclick="flipToLogin()">Sign In</a></div>
+                            <h3 class="panel-title" style="margin: 0; width: 200px;">Sign Up</h3>
+                            <h4 style="float:right; margin:0; font-size: 100%; position: relative; top:-20px"><a id="signinlink" href="#" onclick="flipToLogin()">Sign In</a></h4>
                         </div>
                         <div class="panel-body" >
 
-                            <div style="display:none" id="signup-alert" class="alert alert-danger col-sm-12"></div>
+                            <div style="display:none; margin-top: 15px" id="signup-alert" class="alert alert-danger col-sm-12"></div>
 
                             <form id="signupform" class="form-horizontal" role="form">
 
@@ -141,6 +141,20 @@
                                     <div class="col-md-12">
                                         <input id="signup-password" type="password" class="form-control" name="passwd" placeholder="Password">
                                     </div>
+                                </div>
+                                <div class="form-check" style="margin: 10px 20px">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox" id="check-terms">
+                                        <span class="form-check-sign"></span>
+                                        I accept the <a href="#">Terms and conditons</a>
+                                    </label>
+                                </div>
+                                <div class="form-check" style="margin: 10px 20px">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox" id="check-subscribe">
+                                        <span class="form-check-sign"></span>
+                                        I want to subscribe to the newsletter!
+                                    </label>
                                 </div>
 
                                 <div class="form-group">

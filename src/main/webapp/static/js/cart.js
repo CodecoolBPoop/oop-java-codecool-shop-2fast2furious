@@ -19,18 +19,12 @@ function defaultLogin() {
                 $("#login-password").val("");
                 $("#login-username").val("");
 
-                var x = document.getElementById("snackbar");
-
-                // Add the "show" class to DIV
-                x.className = "show";
-
-                // After 3 seconds, remove the show class from DIV
-                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-
+                snackbar("You logged in!")
             }
         })
     }
 }
+
 
 
 function onSignIn(googleUser) {
@@ -47,6 +41,9 @@ function onSignIn(googleUser) {
         method: "POST",
         data: {
             idToken: id_token
+        },
+        success: function() {
+            snackbar("You logged in!")
         }
     })
 }
@@ -74,7 +71,7 @@ function signOut() {
         url:"/signout",
         method:"POST",
         success: function(resp) {
-
+            snackbar("You logged out!")
         }
     })
 }
@@ -87,6 +84,9 @@ function signUp() {
     if (email === "" || username === "" || password === "") {
         $("#signup-alert").show();
         $("#signup-alert").text("Wrong input!");
+    } else if (!$("#check-terms").prop('checked')) {
+        $("#signup-alert").show();
+        $("#signup-alert").text("You have to accept Terms and agreement!");
     } else {
         $.ajax({
             url: "/signup",
@@ -117,6 +117,14 @@ function validSignUp() {
 function initCounter() {
     let size = $("#shoppingcartlink").attr('value');
     $("#shoppingcarticon").attr('data-content', size);
+}
+
+
+function snackbar(message) {
+    var x = document.getElementById("snackbar");
+    x.innerText = message;
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 }
 
 function addToCartListener() {

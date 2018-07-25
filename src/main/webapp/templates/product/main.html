@@ -8,53 +8,68 @@
 
 <div class="container" th:fragment="content">
 
-    <span id="filterby">Filter by </span>
-    <form method="GET" class="form-inline">
-        <select name="category" class="form-control">
-            <option th:each="prodCat,iterStat : ${allProdCat}" th:text="${prodCat.getName()}"
-                    th:value="${prodCat.getName()}" th:selected="${prodCat.getName() == selectedCategory}">Default
-            </option>
-        </select>
-        <select name="supplier" class="form-control">
-            <option th:each="supp,iterStat : ${allSupp}" th:text="${supp.getName()}" th:value="${supp.getName()}"
-                    th:selected="${supp.getName() == selectedSupplier}">Default
-            </option>
-        </select>
-        <input type="submit" class="btn btn-success" id="filtersubmit">
-        <a href="/shopping_cart" id="shoppingcartlink" th:value="${sizeOfCart}"><i class="fas fa-shopping-cart"
+
+    <form method="GET" class="form-inline" style="display: flex; justify-content: space-between">
+        <div>
+            <span id="filterby">Filter by </span>
+            <select name="category" class="form-control" style="margin: 0px 20px">
+                <option th:each="prodCat,iterStat : ${allProdCat}" th:text="${prodCat.getName()}"
+                        th:value="${prodCat.getName()}" th:selected="${prodCat.getName() == selectedCategory}">Default
+                </option>
+            </select>
+            <select name="supplier" class="form-control" style="margin-right: 20px">
+                <option th:each="supp,iterStat : ${allSupp}" th:text="${supp.getName()}" th:value="${supp.getName()}"
+                        th:selected="${supp.getName() == selectedSupplier}">Default
+                </option>
+            </select>
+            <input type="submit" class="btn btn-success" id="filtersubmit">
+        </div>
+
+        <a href="/shopping_cart" id="shoppingcartlink" th:value="${sizeOfCart}" style="margin-right: 100px"><i class="fas fa-shopping-cart fa-2x"
                                                                                    id="shoppingcarticon"></i></a>
     </form>
 
-
-    <div class="well well-sm">
-        <strong th:text="${selectedCategory}">Category Title</strong>
-    </div>
-
     <div id="products" class="row list-group">
+        <div class="container">
+            <div class="row">
+                <!--<div class="container-fluid">-->
+                <!--d-flex align-items-stretch-->
+                <div class="col-sm-6 col-md-4 d-flex card-group" th:each="prod,iterStat : ${products}">
+                    <!--card-product-->
+                    <div class="card card-product">
+                        <div class="row pl-4 pt-3 pr-4">
+                            <div class="price-container pull-left col-md-8">
+                                <span class="price" th:text="${prod.getPrice()}">€1,459</span>
+                            </div>
+                            <div class="col-md-4">
+                                <a class="btn btn-success addtocart pull-right text-white" th:attr="data-prodid=${prod.getId()}">Add
+                                    to cart</a>
+                            </div>
+                        </div>
+                        <!--<div class="card-block">-->
+                        <div class="card-image">
+                            <a href="#">
+                                <img class="img rounded" src="http://placehold.it/400x250/000/fff"
+                                     th:src="'/static/img/product_' + ${prod.id} + '.jpg'" alt=""/>
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="category text-danger">Trending</h6>
+                            <h4 class="card-title">
+                                <a href="#" class="card-link" th:text="${prod.name}">Dolce & Gabbana</a>
+                            </h4>
+                            <div class="card-description" th:text="${prod.description}">
+                                Dolce & Gabbana's 'Greta' tote has been crafted in Italy from hard-wearing red
+                                textured-leather.
+                            </div>
+                        </div>
 
-        <div class="item col-xs-4 col-lg-4" th:each="prod,iterStat : ${products}">
-            <div class="thumbnail">
-                <div class="imgcont"><img class="group list-group-image" src="http://placehold.it/400x250/000/fff"
-                                          th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt=""/></div>
-                <div class="caption">
-                    <h4 class="group inner list-group-item-heading" th:text="${prod.name}">Product name</h4>
-                    <p class="group inner list-group-item-text" th:text="${prod.description}">Product
-                        description... </p>
-                    <div class="row">
-                        <div class="col-xs-12 col-md-6">
-                            <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
-                        </div>
-                        <div class="col-xs-12 col-md-6">
-                            <a class="btn btn-success addtocart" th:attr="data-prodid=${prod.getId()}">Add to cart</a>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
-
-</div>
-
 
 
 </body>
