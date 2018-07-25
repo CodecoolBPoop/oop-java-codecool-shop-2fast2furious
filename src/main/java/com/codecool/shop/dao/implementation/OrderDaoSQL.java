@@ -138,6 +138,10 @@ public class OrderDaoSQL {
 
         for (OrderedProduct ordered : order.getShoppingCart()) {
             try {
+                connection = Connector.getConnection();
+                statement = null;
+                resultSet = null;
+
                 statement = connection.prepareStatement("INSERT INTO shopping_cart (product, price, order_id) VALUES (?,?,?);");
                 statement.setString(1, ordered.getName());
                 statement.setString(2, String.valueOf(ordered.getQuantity()));
