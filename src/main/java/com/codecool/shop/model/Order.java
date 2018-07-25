@@ -6,22 +6,22 @@ import java.util.ArrayList;
 
 public class Order {
 
-    private static Order instance = null;
+
     private ArrayList<OrderedProduct> shoppingCart = new ArrayList<OrderedProduct>();
     private User user;
-    private Status status;
+    private Status status = Status.NEW;
     private Payment payment;
 
-    private Order() {
-    }
 
-    public static Order getInstance() {
+
+
+    /*public static Order getInstance() {
         if (instance == null) {
             instance = new Order();
             instance.status = Status.NEW;
         }
         return instance;
-    }
+    }*/
 
 
     public void setUser(User user) {
@@ -63,7 +63,7 @@ public class Order {
     }
 
     public String toString() {
-        String result = "";
+        String result = "Im a fucking shopping cart ";
         for (OrderedProduct product : shoppingCart) {
             result += product.getProductId() + " " + product.getName() + " " + product.getQuantity() + "\n";
         }
@@ -99,6 +99,7 @@ public class Order {
     public User getUser() { return user; }
 
     public Payment getPayment() { return this.payment; }
+
 
 
 }
