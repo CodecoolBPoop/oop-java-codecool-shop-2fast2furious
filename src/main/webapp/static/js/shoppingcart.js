@@ -120,6 +120,7 @@ function checkOutToggle() {
     $("#checkouttoggle").click(function () {
         $("#checkout").slideToggle();
     })
+    console.log("Button clicked");
 }
 
 function payToggle() {
