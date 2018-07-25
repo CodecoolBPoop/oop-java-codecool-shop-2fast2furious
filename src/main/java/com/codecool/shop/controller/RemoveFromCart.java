@@ -19,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -32,7 +33,11 @@ public class RemoveFromCart extends HttpServlet {
         int productId = Integer.parseInt(req.getParameter("id"));
 
         ProductDao productDataStore = ProductDaoMem.getInstance();
-        Order order = Order.getInstance();
+
+
+        HttpSession session = req.getSession();
+        Object orderObj = session.getAttribute("order");
+        Order order = (Order) orderObj;
 
 
         if (order.getStatus() == Status.NEW) {

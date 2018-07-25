@@ -19,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +34,15 @@ public class ShoppingCart extends HttpServlet {
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        Order order = Order.getInstance();
+
+        HttpSession session = req.getSession(false);
+        if(session == null){
+            session = req.getSession(true);
+            session.setAttribute("order", new Order());
+        }
+
+        Object orderObj = session.getAttribute("order");
+        Order order = (Order)orderObj;
 
         System.out.println("asdf");
 

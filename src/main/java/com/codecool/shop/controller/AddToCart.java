@@ -2,6 +2,7 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
+import com.codecool.shop.dao.implementation.ProductDaoSQL;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.Status;
@@ -11,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet(urlPatterns = {"/add_to_cart"})
@@ -21,8 +23,18 @@ public class AddToCart extends HttpServlet {
 
         int productId = Integer.parseInt(req.getParameter("id"));
 
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        Order order = Order.getInstance();
+        ProductDao productDataStore = ProductDaoSQL.getInstance();
+
+        HttpSession session = req.getSession(false);
+        if(session == null){
+            session = req.getSession();
+            session.setAttribute("order", new Order());
+        }
+
+        Object orderObj = session.getAttribute("order");
+        Order order = (Order)orderObj;
+
+
 
         if (order.getStatus() == Status.NEW) {
             Product product = productDataStore.find(productId);
