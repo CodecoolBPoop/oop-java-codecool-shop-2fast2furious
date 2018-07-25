@@ -16,36 +16,39 @@ public class Order {
     private Status status = Status.NEW;
     private Payment payment;
     private String userName;
-    private String shippingCountry;
-    private String shippingCity;
-    private String shippingPostcode;
-    private String ShippingAddress;
-    private String billingCountry;
-    private String billingCity;
-    private String billingPostcode;
-    private String billingAddress;
+    private Address shippingAddress;
+    private Address billingAddress;
+
+    public Address getShippingAddress() {
+        return shippingAddress;
+    }
+
+    public void setShippingAddress(Address shippingAddress) {
+        this.shippingAddress = shippingAddress;
+    }
+
+    public Address getBillingAddress() {
+        return billingAddress;
+    }
+
+    public void setBillingAddress(Address billingAddress) {
+        this.billingAddress = billingAddress;
+    }
 
     public Order() {
     }
 
     //FOR TESTING PURPOSES
-    public Order(String username, String city) {
+    public Order(String username) {
         this.setUserName(username);
-        this.setShippingCity(city);
     }
 
-    public Order(User user, Status status, Payment payment, String userName, String shippingCountry, String shippingCity, String shippingPostcode, String shippingAddress, String billingCountry, String billingCity, String billingPostcode, String billingAddress) {
+    public void setOrder(User user, Status status, Payment payment, String userName, Address shippingAddress, Address billingAddress) {
         this.user = user;
         this.status = status;
         this.payment = payment;
         this.userName = userName;
-        this.shippingCountry = shippingCountry;
-        this.shippingCity = shippingCity;
-        this.shippingPostcode = shippingPostcode;
-        ShippingAddress = shippingAddress;
-        this.billingCountry = billingCountry;
-        this.billingCity = billingCity;
-        this.billingPostcode = billingPostcode;
+        this.shippingAddress = shippingAddress;
         this.billingAddress = billingAddress;
     }
 
@@ -55,70 +58,6 @@ public class Order {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public String getShippingCountry() {
-        return shippingCountry;
-    }
-
-    public void setShippingCountry(String shippingCountry) {
-        this.shippingCountry = shippingCountry;
-    }
-
-    public String getShippingCity() {
-        return shippingCity;
-    }
-
-    public void setShippingCity(String shippingCity) {
-        this.shippingCity = shippingCity;
-    }
-
-    public String getShippingPostcode() {
-        return shippingPostcode;
-    }
-
-    public void setShippingPostcode(String shippingPostcode) {
-        this.shippingPostcode = shippingPostcode;
-    }
-
-    public String getShippingAddress() {
-        return ShippingAddress;
-    }
-
-    public void setShippingAddress(String shippingAddress) {
-        ShippingAddress = shippingAddress;
-    }
-
-    public String getBillingCountry() {
-        return billingCountry;
-    }
-
-    public void setBillingCountry(String billingCountry) {
-        this.billingCountry = billingCountry;
-    }
-
-    public String getBillingCity() {
-        return billingCity;
-    }
-
-    public void setBillingCity(String billingCity) {
-        this.billingCity = billingCity;
-    }
-
-    public String getBillingPostcode() {
-        return billingPostcode;
-    }
-
-    public void setBillingPostcode(String billingPostcode) {
-        this.billingPostcode = billingPostcode;
-    }
-
-    public String getBillingAddress() {
-        return billingAddress;
-    }
-
-    public void setBillingAddress(String billingAddress) {
-        this.billingAddress = billingAddress;
     }
 
     public void addProduct(Product newProduct) {
@@ -213,7 +152,7 @@ public class Order {
         this.payment = payment;
     }
 
-    public void saveOrderToDB() {
+  /*  public void saveOrderToDB() {
         Connection connection = Connector.getConnection();
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -265,5 +204,6 @@ public class Order {
             e.printStackTrace();
         }
     }
+    */
 }
 

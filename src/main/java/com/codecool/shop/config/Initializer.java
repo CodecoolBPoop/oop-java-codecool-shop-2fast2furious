@@ -64,8 +64,10 @@ public class Initializer implements ServletContextListener {
 
 
 
-//        Order testOrder = new Order("Tomibacsi", "Pest");
+        Order testOrder = new Order("Tomibacsi");
 //        testOrder.TESTsaveOrderToDB();
 
+        OrderDaoSQL daoSQL = OrderDaoSQL.getInstance();
+        daoSQL.upload(testOrder);
     }
 }
