@@ -113,6 +113,7 @@ public class User {
         Connection connection = Connector.getConnection();
         PreparedStatement statement = null;
         ResultSet resultSet = null;
+        System.out.println(password + email);
 
         try{
             statement = connection.prepareStatement("SELECT * FROM users where email LIKE ?");
@@ -120,6 +121,7 @@ public class User {
             resultSet = statement.executeQuery();
             try{
                 resultSet.next();
+                System.out.println(resultSet.getString("password"));
                 if(password.equals(resultSet.getString("password"))){
                     return true;
                 }
