@@ -11,7 +11,64 @@ public class Order {
     private User user;
     private Status status = Status.NEW;
     private Payment payment;
+    private int shoppingCartID;
+    private String userName;
+    private String shippingCountry;
+    private String shippingCity;
+    private String shippingPostcode;
+    private String ShippingAddress;
+    private String billingCountry;
+    private String billingCity;
+    private String billingPostcode;
+    private String billingAddress;
+    
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
 
+    public int getShoppingCartID() {
+        return shoppingCartID;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getShippingCountry() {
+        return shippingCountry;
+    }
+
+    public void setShippingCountry(String shippingCountry) {
+        this.shippingCountry = shippingCountry;
+    }
+
+    public String getShippingCity() {
+        return shippingCity;
+    }
+
+    public void setShippingCity(String shippingCity) {
+        this.shippingCity = shippingCity;
+    }
+
+    public String getShippingPostcode() {
+        return shippingPostcode;
+    }
+
+    public void setShippingPostcode(String shippingPostcode) {
+        this.shippingPostcode = shippingPostcode;
+    }
+
+    public String getShippingAddress() {
+        return ShippingAddress;
+    }
+
+    public void setShippingAddress(String shippingAddress) {
+        ShippingAddress = shippingAddress;
+    }
 
 
 
@@ -99,6 +156,7 @@ public class Order {
     public User getUser() { return user; }
 
     public Payment getPayment() { return this.payment; }
+
 
 
 
