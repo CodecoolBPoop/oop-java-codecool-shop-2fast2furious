@@ -21,6 +21,7 @@
     <link href="static/css/demo.css" rel="stylesheet"/>
     <link href="static/css/snackbar.css" rel="stylesheet"/>
     <script src="static/js/login-register.js" defer></script>
+    <script src="static/js/shoppingcart.js" defer></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 
 </head>
@@ -33,7 +34,9 @@
     </div>
     <div th:replace="product/navbar.html :: loginmodal">
     </div>
-    <div th:replace="${page} :: content">
+    <div style="margin-top: 65px">
+        <div th:replace="${page} :: content">
+        </div>
     </div>
 
     <div th:replace="footer.html :: copy"></div>
