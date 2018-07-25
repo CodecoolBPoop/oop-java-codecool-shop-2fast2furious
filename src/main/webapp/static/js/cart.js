@@ -138,7 +138,6 @@ function addToCartListener() {
             let prodid = event.target.dataset.prodid;
             $.ajax({
                 url:`/add_to_cart?id=${prodid}`
-
             })
         }
     )

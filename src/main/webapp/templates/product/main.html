@@ -17,7 +17,7 @@
                         th:value="${prodCat.getName()}" th:selected="${prodCat.getName() == selectedCategory}">Default
                 </option>
             </select>
-            <select name="supplier" class="form-control" style="margin-right: 20px">
+            <select name="supplier" class="form-control" style="margin: 0px 20px">
                 <option th:each="supp,iterStat : ${allSupp}" th:text="${supp.getName()}" th:value="${supp.getName()}"
                         th:selected="${supp.getName() == selectedSupplier}">Default
                 </option>
@@ -42,7 +42,7 @@
                                 <span class="price" th:text="${prod.getPrice()}">€1,459</span>
                             </div>
                             <div class="col-md-4">
-                                <a class="btn btn-success addtocart pull-right text-white" th:attr="data-prodid=${prod.getId()}">Add
+                                <a href="#" class="btn btn-success addtocart pull-right text-white" th:attr="data-prodid=${prod.getId()}">Add
                                     to cart</a>
                             </div>
                         </div>

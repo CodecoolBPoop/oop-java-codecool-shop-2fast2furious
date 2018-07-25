@@ -146,7 +146,7 @@ function ccButton() {
 }
 
 
-function main() {
+function main2() {
     incrementButtonsListener();
     decrementButtonListener();
     sendCheckout();
@@ -155,12 +155,11 @@ function main() {
     payPalButton();
     ccButton();
     ccPay();
-
 }
 
 
 $(document).ready(function () {
-    main()
+    main2()
     $("#paytoggle").prop("disabled", true);
     $("#checkoutdanger").hide();
 
