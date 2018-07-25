@@ -22,24 +22,6 @@ public class OrderDaoSQL {
     private OrderDaoSQL() {
     }
 
-    public validateOrderFields(Order order) {
-        //TODO Make iterable
-        String orderUserName = ((order.getUserName()) == null) ? "" : order.getUserName();
-        String username = (order.getUser() == null) ? "" : order.getUser().getName();
-        String status = order.getStatus().toString();
-        String payment = (order.getPayment() == null) ? "" : order.getPayment().toString();
-        String shippingCountry = (order.getShippingAddress() == null) ? "" : order.getShippingAddress().getCountry();
-        String shippingCity = (order.getShippingAddress() == null) ? "" : order.getShippingAddress().getCity();
-        String shippingAddress = (order.getShippingAddress() == null) ? "" : order.getShippingAddress().getAddress();
-        String shippingPostcode = (order.getShippingAddress() == null) ? "" : String.valueOf(order.getShippingAddress().getZipCode());
-        String billingCountry = (order.getBillingAddress() == null) ? "" : order.getBillingAddress().getCountry();
-        String billingCity = (order.getBillingAddress() == null) ? "" : order.getBillingAddress().getCity();
-        String billingAddress = (order.getBillingAddress() == null) ? "" : order.getBillingAddress().getAddress();
-        String billingPostcode = (order.getBillingAddress() == null) ? "" : String.valueOf(order.getBillingAddress().getZipCode());
-
-        java.sql.Timestamp sqlDate = new java.sql.Timestamp(new java.util.Date().getTime());
-    }
-
     public static OrderDaoSQL getInstance() {
         if (instance == null) {
             instance = new OrderDaoSQL();
@@ -142,10 +124,8 @@ public class OrderDaoSQL {
             statement.setString(11, payment);
             statement.setTimestamp(12, sqlDate);
 
-
             statement.executeUpdate();
             resultSet = statement.getGeneratedKeys();
-            int generatedKey = 0;
             if (resultSet.next()) {
                 generatedKey = resultSet.getInt(1);
             }
