@@ -1,9 +1,16 @@
 package com.codecool.shop.model;
 
 
+import com.codecool.shop.dao.Connector;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class User {
 
-    private static User instance = null;
+
     private String name;
     private String phoneNumber;
     private String email;
@@ -11,15 +18,7 @@ public class User {
     private Address billingAddress;
 
 
-    private User() {
-    }
 
-    public static User getInstance() {
-        if (instance == null) {
-            instance = new User();
-        }
-        return instance;
-    }
 
     public void setUserDataForCheckout(String name, String phoneNumber, String email, Address shippingAddress, Address billingAddress) {
         this.name = name;
@@ -35,4 +34,77 @@ public class User {
 
     public Address getBillingAddress() { return billingAddress; }
 
+    public static boolean isEmailUnique(String email){
+        Connection connection = Connector.getConnection();
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        boolean isUnique = true;
+
+        try{
+            statement = connection.prepareStatement("SELECT * FROM users WHERE email LIKE ?");
+            statement.setString(1,email);
+            resultSet = statement.executeQuery();
+
+            while (resultSet.next()){
+                String temp = resultSet.getString("email");
+                if (temp.equals(email)){
+                    isUnique = false;
+                }
+            }
+
+
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return isUnique;
+
+    }
+
+    public static boolean isUsernameUnique(String username){
+        Connection connection = Connector.getConnection();
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        boolean isUnique = true;
+
+        try{
+            statement = connection.prepareStatement("SELECT * FROM users WHERE username LIKE ?");
+            statement.setString(1,username);
+            resultSet = statement.executeQuery();
+
+            while (resultSet.next()){
+                String temp = resultSet.getString("username");
+                if (temp.equals(username)){
+                    isUnique = false;
+                }
+            }
+
+
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return isUnique;
+
+    }
+
+    public static void registerNewUser(String username, String password, String email){
+        Connection connection = Connector.getConnection();
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try{
+            statement = connection.prepareStatement("INSERT INTO users (password, username, email) VALUES (?,?,?)");
+            statement.setString(1,password);
+            statement.setString(2,username);
+            statement.setString(3,email);
+            statement.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+
+    }
 }

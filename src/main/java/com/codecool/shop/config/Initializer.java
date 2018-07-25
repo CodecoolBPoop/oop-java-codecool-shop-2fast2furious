@@ -7,6 +7,7 @@ import com.codecool.shop.dao.implementation.*;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
+import com.codecool.shop.model.User;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -63,7 +64,11 @@ public class Initializer implements ServletContextListener {
         productCategoryDataStore.getAll();
         supplierDataStore.getAll();
 
-        System.out.println(productDataStore.getAll());
+        System.out.println(User.isEmailUnique("regoczi.tamas01@gmail.com"));
+        System.out.println(User.isUsernameUnique("Thomaster"));
+/*
+        User.registerNewUser("Tommyboy", "shithead", "shithead@gmail.com");
+*/
 
 
 
