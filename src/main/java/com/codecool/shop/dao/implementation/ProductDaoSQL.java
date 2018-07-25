@@ -92,6 +92,7 @@ public class ProductDaoSQL implements ProductDao {
     @Override
     public List<Product> getBy(String supplier, String category) {
         List<Product> result = data.stream().collect(Collectors.toList());
+
         
         if (!supplier.equals("ALL")) {
             result = result.stream().filter(t -> t.getSupplier().getName().equals(supplier)).collect(Collectors.toList());

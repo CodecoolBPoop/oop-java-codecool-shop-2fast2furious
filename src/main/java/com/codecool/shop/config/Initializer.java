@@ -60,12 +60,8 @@ public class Initializer implements ServletContextListener {
 
         productCategoryDataStore.getAll();
         supplierDataStore.getAll();
+        productDataStore.getAll();
 
-        System.out.println(User.isEmailUnique("regoczi.tamas01@gmail.com"));
-        System.out.println(User.isUsernameUnique("Thomaster"));
-/*
-        User.registerNewUser("Tommyboy", "shithead", "shithead@gmail.com");
-*/
 
 
 //        Order testOrder = new Order("Tomibacsi", "Pest");

@@ -9,17 +9,19 @@ function defaultLogin() {
             url:"/default-login",
             method: "POST",
             data: {
-                username: username,
+                email: username,
                 password: password
             },
             success: function (resp) {
-                $('#loginModal').modal('hide');
-                $('#navbar-login').hide();
-                $('#navbar-logout-basic').show();
-                $("#login-password").val("");
-                $("#login-username").val("");
 
-                snackbar("You logged in!")
+                if (resp === "success") {
+                    window.location.reload();
+                    snackbar("You logged in!")
+                } else {
+                    $("#login-alert").show();
+                    $("#login-alert").text(resp);
+                }
+
             }
         })
     }
@@ -72,6 +74,7 @@ function signOut() {
         method:"POST",
         success: function(resp) {
             snackbar("You logged out!")
+            window.location.reload();
         }
     })
 }
@@ -99,7 +102,6 @@ function signUp() {
             success: function(resp) {
                 if (resp === "success") {
                     validSignUp();
-                    alert("success");
                 } else {
                     $("#signup-alert").show();
                     $("#signup-alert").text(resp);
@@ -111,7 +113,7 @@ function signUp() {
 }
 
 function validSignUp() {
-
+    window.location.reload();
 }
 
 function initCounter() {
@@ -156,7 +158,18 @@ function buttonListeners() {
     )
 }
 
+function userCheck() {
+    let email = $("#logged-in-email").attr("value")
+    console.log(email)
+    if (email == "") {
+        $("#navbar-login").show();
+    } else {
+        $("#navbar-logout-basic").show();
+    }
+}
+
 function main() {
+    userCheck();
     addToCartListener();
     buttonListeners();
     initCounter();

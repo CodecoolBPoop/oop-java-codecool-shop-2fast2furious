@@ -2,6 +2,7 @@ package com.codecool.shop.model;
 
 
 import com.codecool.shop.dao.Connector;
+import org.postgresql.util.PSQLException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -104,6 +105,36 @@ public class User {
         }catch(SQLException e){
             e.printStackTrace();
         }
+
+
+    }
+
+    public static boolean validatePwAndEmail(String password, String email){
+        Connection connection = Connector.getConnection();
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        System.out.println(password + email);
+
+        try{
+            statement = connection.prepareStatement("SELECT * FROM users where email LIKE ?");
+            statement.setString(1,email);
+            resultSet = statement.executeQuery();
+            try{
+                resultSet.next();
+                System.out.println(resultSet.getString("password"));
+                if(password.equals(resultSet.getString("password"))){
+                    return true;
+                }
+            }catch (PSQLException e){
+                return false;
+            }
+
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+        return false;
 
 
     }
