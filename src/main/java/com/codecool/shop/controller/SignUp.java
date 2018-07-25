@@ -19,7 +19,6 @@ public class SignUp extends HttpServlet {
         resp.setContentType("text/plain");
         resp.setCharacterEncoding("UTF-8");
 
-
         String username = req.getParameter("username");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
