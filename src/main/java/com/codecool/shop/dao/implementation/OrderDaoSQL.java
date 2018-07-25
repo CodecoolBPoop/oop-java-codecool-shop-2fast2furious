@@ -79,7 +79,7 @@ public class OrderDaoSQL {
             }
 
             System.out.println("Inserted record's ID: " + generatedKey);
-            System.out.println("DONE");
+            System.out.println("Order saved");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -131,7 +131,7 @@ public class OrderDaoSQL {
             }
 
             System.out.println("Inserted record's ID: " + generatedKey);
-            System.out.println("DONE");
+            System.out.println("Order saved");
         } catch (SQLException e) {
             e.printStackTrace();
         }
