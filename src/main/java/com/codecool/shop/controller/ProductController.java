@@ -39,7 +39,7 @@ public class ProductController extends HttpServlet {
         if(session == null){
             session = req.getSession(true);
             session.setAttribute("order", new Order());
-            session.setAttribute("email", "asdf");
+            session.setAttribute("email", "");
         }
 
         Object orderObj = session.getAttribute("order");

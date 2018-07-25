@@ -9,7 +9,7 @@ function defaultLogin() {
             url:"/default-login",
             method: "POST",
             data: {
-                username: username,
+                email: username,
                 password: password
             },
             success: function (resp) {
