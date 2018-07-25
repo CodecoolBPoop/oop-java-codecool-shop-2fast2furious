@@ -44,8 +44,6 @@ public class ProductController extends HttpServlet {
         Object orderObj = session.getAttribute("order");
         Order order = (Order)orderObj;
 
-
-
         ProductDao productDataStore = ProductDaoSQL.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoSQL.getInstance();
         SupplierDao supplierDataStore = SupplierDaoSQL.getInstance();

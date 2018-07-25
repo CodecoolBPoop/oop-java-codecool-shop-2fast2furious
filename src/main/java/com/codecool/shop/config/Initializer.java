@@ -4,10 +4,7 @@ import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.*;
-import com.codecool.shop.model.Product;
-import com.codecool.shop.model.ProductCategory;
-import com.codecool.shop.model.Supplier;
-import com.codecool.shop.model.User;
+import com.codecool.shop.model.*;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -71,6 +68,8 @@ public class Initializer implements ServletContextListener {
 */
 
 
+//        Order testOrder = new Order("Tomibacsi", "Pest");
+//        testOrder.TESTsaveOrderToDB();
 
     }
 }
