@@ -8,15 +8,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {"/signout"})
-public class SignOut extends HttpServlet {
+@WebServlet(urlPatterns = {"/facebook-login"})
+public class FacebookLogin extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        HttpSession session = req.getSession(false);
-        session.setAttribute("email", "");
-        session.setAttribute("login_type", "");
+        String email = req.getParameter("email");
+        HttpSession session = req.getSession(true);
+        session = req.getSession(true);
+        session.setAttribute("login_type", "facebook");
+        session.setAttribute("email", email);
 
     }
 

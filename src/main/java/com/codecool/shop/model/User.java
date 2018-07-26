@@ -35,6 +35,45 @@ public class User {
 
     public Address getBillingAddress() { return billingAddress; }
 
+
+    public static String getUsername(String email) {
+        Connection connection = Connector.getConnection();
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try{
+            statement = connection.prepareStatement("SELECT username FROM users WHERE email LIKE ?");
+            statement.setString(1, email);
+            resultSet = statement.executeQuery();
+            resultSet.next();
+            return resultSet.getString("username");
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    public static boolean isPasswordNull(String email) {
+        Connection connection = Connector.getConnection();
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try{
+            statement = connection.prepareStatement("SELECT password FROM users WHERE email LIKE ?");
+            statement.setString(1, email);
+            resultSet = statement.executeQuery();
+            resultSet.next();
+            if (resultSet.getString("password") == null) {
+                return true;
+            }
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public static boolean isEmailUnique(String email){
         Connection connection = Connector.getConnection();
         PreparedStatement statement = null;
@@ -52,8 +91,6 @@ public class User {
                     isUnique = false;
                 }
             }
-
-
 
         }catch (SQLException e){
             e.printStackTrace();
@@ -106,14 +143,45 @@ public class User {
             e.printStackTrace();
         }
 
+    }
 
+    public static void registerUserWithAuth(String email) {
+        Connection connection = Connector.getConnection();
+        PreparedStatement statement = null;
+
+        try{
+            if (isEmailUnique(email)) {
+                statement = connection.prepareStatement("INSERT INTO users (email) VALUES (?)");
+                statement.setString(1,email);
+                statement.executeUpdate();
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void insertPasswordToUser(String password, String email, String username) {
+        Connection connection = Connector.getConnection();
+        PreparedStatement statement = null;
+
+        try{
+            if (isEmailUnique(password)) {
+                statement = connection.prepareStatement("UPDATE users SET password = (?), username = (?) WHERE email LIKE (?)");
+                statement.setString(1,password);
+                statement.setString(2,username);
+                statement.setString(3,email);
+                statement.executeUpdate();
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
     }
 
     public static boolean validatePwAndEmail(String password, String email){
         Connection connection = Connector.getConnection();
         PreparedStatement statement = null;
         ResultSet resultSet = null;
-        System.out.println(password + email);
 
         try{
             statement = connection.prepareStatement("SELECT * FROM users where email LIKE ?");
@@ -121,7 +189,6 @@ public class User {
             resultSet = statement.executeQuery();
             try{
                 resultSet.next();
-                System.out.println(resultSet.getString("password"));
                 if(password.equals(resultSet.getString("password"))){
                     return true;
                 }
@@ -135,7 +202,23 @@ public class User {
         }
 
         return false;
+    }
 
+    public static int getIdByEmail(String email) {
+        Connection connection = Connector.getConnection();
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
 
+        try{
+            statement = connection.prepareStatement("SELECT * FROM users where email LIKE ?");
+            statement.setString(1, email);
+            resultSet = statement.executeQuery();
+            resultSet.next();
+            return resultSet.getInt("id");
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return 1;
     }
 }

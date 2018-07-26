@@ -1,6 +1,7 @@
 package com.codecool.shop.controller;
 
 
+import com.codecool.shop.model.Order;
 import com.codecool.shop.model.User;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,8 +32,10 @@ public class DefaultLogin extends HttpServlet {
             HttpSession session = req.getSession(true);
             session = req.getSession(true);
             session.setAttribute("email", email);
+            session.setAttribute("username", User.getUsername(email));
+            session.setAttribute("login_type", "default");
+
         }
-        System.out.println(message);
 
         resp.getWriter().write(message);
 

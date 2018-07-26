@@ -1,5 +1,6 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.model.User;
 import org.json.JSONObject;
 
 import javax.servlet.ServletException;
@@ -7,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -41,7 +43,13 @@ public class GmailLogin extends HttpServlet {
         String result = content.toString();
         JSONObject jsonObject = new JSONObject(result);
         String email = jsonObject.getString("email");
-        System.out.println("YOUR EMAIL: " + email);
+
+        User.registerUserWithAuth(email);
+
+        HttpSession session = req.getSession(true);
+        session = req.getSession(true);
+        session.setAttribute("login_type", "google");
+        session.setAttribute("email", email);
 
     }
 

@@ -5,6 +5,7 @@ import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.model.Address;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.OrderedProduct;
+import com.codecool.shop.model.User;
 
 import java.lang.reflect.Field;
 import java.sql.Connection;
@@ -87,7 +88,6 @@ public class OrderDaoSQL {
     }
 
     public void uploadOrderWithCart(Order order) {
-
 
         String orderUserName = ((order.getUserName()) == null) ? "" : order.getUserName();
         String username = (order.getUser() == null) ? "" : order.getUser().getName();
