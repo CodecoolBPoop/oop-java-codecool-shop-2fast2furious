@@ -11,18 +11,18 @@
 
     <form method="GET" class="form-inline" style="display: flex; justify-content: space-between">
         <div>
-            <span id="filterby">Filter by </span>
-            <select name="category" class="form-control" style="margin: 0px 20px">
+            <span id="filterby" style="margin: 0px 10px">Filter by </span>
+            <select name="category" class="form-control" style="margin: 0px 10px">
                 <option th:each="prodCat,iterStat : ${allProdCat}" th:text="${prodCat.getName()}"
                         th:value="${prodCat.getName()}" th:selected="${prodCat.getName() == selectedCategory}">Default
                 </option>
             </select>
-            <select name="supplier" class="form-control" style="margin: 0px 20px">
+            <select name="supplier" class="form-control" style="margin: 0px 10px">
                 <option th:each="supp,iterStat : ${allSupp}" th:text="${supp.getName()}" th:value="${supp.getName()}"
                         th:selected="${supp.getName() == selectedSupplier}">Default
                 </option>
             </select>
-            <input type="submit" class="btn btn-success" id="filtersubmit">
+            <input type="submit" class="btn btn-success" id="filtersubmit" style="margin: 0px 10px">
         </div>
 
         <a href="/shopping_cart" id="shoppingcartlink" th:value="${sizeOfCart}" style="margin-right: 100px"><i class="fas fa-shopping-cart fa-2x"

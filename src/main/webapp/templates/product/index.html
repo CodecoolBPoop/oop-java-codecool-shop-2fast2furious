@@ -30,8 +30,12 @@
 
 <body>
 
+
+
     <div id="snackbar"></div>
     <div id="logged-in-email" th:value="${session.email}"></div>
+    <div id="logged-in-username" th:value="${session.username}"></div>
+    <div id="login-type" th:value="${session.login_type}"></div>
 
     <div th:replace="product/navbar.html :: navbar">
     </div>
@@ -43,6 +47,7 @@
     </div>
 
     <div th:replace="footer.html :: copy"></div>
+
 
 </body>
 

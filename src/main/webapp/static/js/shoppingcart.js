@@ -3,7 +3,7 @@
 
 function incrementButtonsListener(){
     $(".inc").click(function (event) {
-        console.log(event)
+        console.log("inc")
         let prodid = event.currentTarget.dataset.prodid;
         $.ajax({
             url:`/add_to_cart?id=${prodid}`,
@@ -20,7 +20,7 @@ function incrementButtonsListener(){
 
 function decrementButtonListener() {
     $(".dec").click(function (event) {
-        console.log(event)
+        console.log("dec")
         let prodid = event.currentTarget.dataset.prodid;
         let quantity = parseInt($(`[data-qid='${prodid}']`).html())
         if(quantity > 0){
