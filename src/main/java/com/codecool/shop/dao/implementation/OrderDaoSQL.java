@@ -112,7 +112,6 @@ public class OrderDaoSQL {
         String SQLmethod;
 
 
-
         try {
             if (order.getOrderID() != null) {
                 statement = connection.prepareStatement("UPDATE orders " +
@@ -130,8 +129,8 @@ public class OrderDaoSQL {
                         "WHERE id = ?;");
             } else {
                 statement = connection.prepareStatement("INSERT INTO orders (name, sh_country, sh_city," +
-                        "sh_address, sh_postcode, bill_country, bill_city, bill_address, bill_postcode, status, payment, time)" +
-                        "VALUES (?,?,?,?,?,?,?,?,?,?,?,?);", statement.RETURN_GENERATED_KEYS);
+                        "sh_address, sh_postcode, bill_country, bill_city, bill_address, bill_postcode, status, payment, time, user_id)" +
+                        "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);", statement.RETURN_GENERATED_KEYS);
             }
 
 
@@ -147,15 +146,16 @@ public class OrderDaoSQL {
             statement.setString(9, billingPostcode);
             statement.setString(10, status);
             statement.setString(11, payment);
-            if(order.getOrderID() == null) {
+            if (order.getOrderID() == null) {
                 statement.setTimestamp(12, sqlDate);
             } else {
                 statement.setInt(12, order.getOrderID());
             }
+            statement.setInt(13, order.getUserID());
             System.out.println(statement);
             statement.executeUpdate();
 
-            if(order.getOrderID() == null) {
+            if (order.getOrderID() == null) {
                 resultSet = statement.getGeneratedKeys();
                 if (resultSet.next()) {
                     generatedKey = resultSet.getInt(1);
@@ -170,14 +170,13 @@ public class OrderDaoSQL {
         }
 
 
-
         if (!order.getShoppingCart().isEmpty()) {
             statement = null;
             try {
                 statement = connection.prepareStatement("DELETE FROM shopping_cart WHERE order_id = ?");
                 statement.setInt(1, order.getOrderID());
                 statement.executeUpdate();
-            }catch (SQLException e){
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
 
@@ -202,7 +201,7 @@ public class OrderDaoSQL {
 
     }
 
-    public Order retrieveOrderFromSQL(int orderId){
+    public Order retrieveOrderFromSQL(int orderId) {
         Order order = new Order();
         Connection connection = Connector.getConnection();
         PreparedStatement statement = null;
@@ -212,18 +211,18 @@ public class OrderDaoSQL {
             statement.setInt(1, orderId);
             resultSet = statement.executeQuery();
             resultSet.next();
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
 
         try {
-            if (!resultSet.getString("sh_country").equals("")){
-                Address saddress = new Address(resultSet.getString("sh_country"),resultSet.getString("sh_city"),resultSet.getString("sh_address"), resultSet.getInt("sh_postcode"));
+            if (!resultSet.getString("sh_country").equals("")) {
+                Address saddress = new Address(resultSet.getString("sh_country"), resultSet.getString("sh_city"), resultSet.getString("sh_address"), resultSet.getInt("sh_postcode"));
                 order.setShippingAddress(saddress);
             }
-            if (!resultSet.getString("bill_country").equals("")){
-                Address baddress = new Address(resultSet.getString("bill_country"),resultSet.getString("bill_city"),resultSet.getString("bill_address"), resultSet.getInt("bill_postcode"));
+            if (!resultSet.getString("bill_country").equals("")) {
+                Address baddress = new Address(resultSet.getString("bill_country"), resultSet.getString("bill_city"), resultSet.getString("bill_address"), resultSet.getInt("bill_postcode"));
                 order.setBillingAddress(baddress);
             }
 
@@ -231,8 +230,7 @@ public class OrderDaoSQL {
             order.setOrderID(id);
 
 
-
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
@@ -244,24 +242,43 @@ public class OrderDaoSQL {
             statement = connection.prepareStatement("SELECT * FROM shopping_cart WHERE order_id = ?");
             statement.setInt(1, orderId);
             resultSet = statement.executeQuery();
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        try{
-            while(resultSet.next()){
+        try {
+            while (resultSet.next()) {
                 int productId = resultSet.getInt("product");
                 order.addProduct(products.find(productId));
 
             }
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
-         return order;
-
-
+        return order;
     }
 
+
+    public ArrayList retrieveAllOrdersByUserID(int id) {
+        Connection connection = Connector.getConnection();
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        ArrayList<Order> ordersFromSQL = new ArrayList<>();
+
+        try {
+            statement = connection.prepareStatement("SELECT * FROM orders WHERE user_id = ?");
+            statement.setInt(1, id);
+            resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                ordersFromSQL.add(retrieveOrderFromSQL(resultSet.getInt("id")));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return ordersFromSQL;
+    }
 }

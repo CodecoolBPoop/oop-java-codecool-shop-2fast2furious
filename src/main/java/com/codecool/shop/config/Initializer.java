@@ -9,6 +9,7 @@ import com.codecool.shop.model.*;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+import java.util.ArrayList;
 
 @WebListener
 public class Initializer implements ServletContextListener {

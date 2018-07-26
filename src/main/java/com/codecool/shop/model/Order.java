@@ -21,6 +21,15 @@ public class Order {
     private Address shippingAddress;
     private Address billingAddress;
     private Integer orderID = null;
+    private int userID;
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
 
     public Integer getOrderID() {
         return orderID;
