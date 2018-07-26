@@ -210,6 +210,7 @@ public class OrderDaoSQL {
         try {
             statement = connection.prepareStatement("SELECT * FROM orders WHERE id = ?");
             statement.setInt(1, orderId);
+            resultSet = statement.executeQuery();
             resultSet.next();
         }catch (SQLException e){
             e.printStackTrace();
