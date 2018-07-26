@@ -9,6 +9,7 @@ import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.Product;
+import com.codecool.shop.model.User;
 import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -31,19 +32,28 @@ public class ProductController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String category = req.getParameter("category");
-        if (category == null) { category = "ALL"; }
+        if (category == null) {
+            category = "ALL";
+        }
         String supplier = req.getParameter("supplier");
-        if (supplier == null) { supplier = "ALL"; }
+        if (supplier == null) {
+            supplier = "ALL";
+        }
 
         HttpSession session = req.getSession(false);
-        if(session == null){
+        if (session == null) {
             session = req.getSession(true);
             session.setAttribute("order", new Order());
             session.setAttribute("email", "");
         }
 
         Object orderObj = session.getAttribute("order");
-        Order order = (Order)orderObj;
+        Order order = (Order) orderObj;
+
+        if (!(session.getAttribute("email") == null || session.getAttribute("email").equals(""))) {
+            String email = req.getParameter("email");
+            order.setUserID(User.getIdByEmail(email));
+        }
 
         ProductDao productDataStore = ProductDaoSQL.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoSQL.getInstance();
@@ -60,7 +70,7 @@ public class ProductController extends HttpServlet {
         context.setVariable("sizeOfCart", order.getNumberOfOrdered());
         context.setVariable("allProdCat", productCategoryDataStore.getAll());
         context.setVariable("allSupp", supplierDataStore.getAll());
-        context.setVariable("products", productDataStore.getBy(supplier,category ));
+        context.setVariable("products", productDataStore.getBy(supplier, category));
         context.setVariable("session", session);
         engine.process("product/index.html", context, resp.getWriter());
     }
