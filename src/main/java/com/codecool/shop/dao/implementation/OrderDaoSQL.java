@@ -254,12 +254,11 @@ public class OrderDaoSQL {
 
             }
 
-
-
         }catch (SQLException e){
             e.printStackTrace();
         }
 
+         return order;
 
 
     }
