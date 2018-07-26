@@ -16,6 +16,7 @@ public class SignOut extends HttpServlet {
 
         HttpSession session = req.getSession(false);
         session.setAttribute("email", "");
+        session.setAttribute("login_type", "");
 
     }
 

@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
@@ -31,6 +32,11 @@ public class SignUp extends HttpServlet {
             message = "Email already in use";
         }else{
             User.registerNewUser(username,password,email);
+            HttpSession session = req.getSession(true);
+            session = req.getSession(true);
+            session.setAttribute("email", email);
+            session.setAttribute("username", username);
+            session.setAttribute("login_type", "default");
         }
 
         resp.getWriter().write(message);

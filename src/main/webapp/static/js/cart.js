@@ -27,48 +27,39 @@ function defaultLogin() {
     }
 }
 
-
-
 function onSignIn(googleUser) {
-    $("#navbar-login").hide();
-    $("#navbar-logout-google").show();
-    $('#loginModal').modal('hide');
+
     let profile=googleUser.getBasicProfile();
-    $("#navbar-logout-google .user-name-label").html('Welcome, ' + profile.getName());
-    $("#gmail-profile-image").attr("src", profile.getImageUrl());
-    let id_token = googleUser.getAuthResponse().id_token;
-    console.log("ID Token: " + id_token);
-    $.ajax({
-        url:"/gmail-login",
-        method: "POST",
-        data: {
-            idToken: id_token
-        },
-        success: function() {
-            snackbar("You logged in!")
-        }
-    })
+
+    if ($("#login-type").attr("value") == "") {
+        let id_token = googleUser.getAuthResponse().id_token;
+        $.ajax({
+            url:"/gmail-login",
+            method: "POST",
+            data: {
+                idToken: id_token
+            },
+            success: function() {
+                window.location.reload();
+                snackbar("You logged in!")
+            }
+        })
+    } else {
+        $("#navbar-logout-google .user-name-label").html(
+            '<p style="margin-right: 20px; color: white;">Welcome, ' + profile.getName() + '</p>'
+        );
+        $("#gmail-profile-image").attr("src", profile.getImageUrl());
+    }
+
 }
 
-
-function signOutGoogle() {
-    $("#navbar-logout-google").hide();
-    $("#navbar-logout-google .user-name-label").html("");
-    let auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-        console.log('User signed out.');
-    });
-    signOut();
-}
-
-function signOutBasic() {
-    $("#navbar-logout-basic .user-name-label").html("");
-    $("#navbar-logout-basic").hide();
-    signOut();
-}
 
 function signOut() {
-    $("#navbar-login").show();
+    if ($("#login-type").attr('value') === "google") {
+        let auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut()
+    }
+
     $.ajax({
         url:"/signout",
         method:"POST",
@@ -101,7 +92,8 @@ function signUp() {
             },
             success: function(resp) {
                 if (resp === "success") {
-                    validSignUp();
+                    $("#loginModal").hide()
+                    window.location.reload();
                 } else {
                     $("#signup-alert").show();
                     $("#signup-alert").text(resp);
@@ -112,15 +104,11 @@ function signUp() {
 
 }
 
-function validSignUp() {
-    window.location.reload();
-}
 
 function initCounter() {
     let size = $("#shoppingcartlink").attr('value');
     $("#shoppingcarticon").attr('data-content', size);
 }
-
 
 function snackbar(message) {
     var x = document.getElementById("snackbar");
@@ -164,7 +152,15 @@ function userCheck() {
     if (email == "") {
         $("#navbar-login").show();
     } else {
-        $("#navbar-logout-basic").show();
+        let login_type = $("#login-type").attr("value")
+        if (login_type === "google") {
+            $("#navbar-logout-google").show();
+        } else {
+            $("#navbar-logout-basic").show();
+            $("#navbar-logout-basic .user-name-label").html(
+                '<p style="margin-right: 20px; color: white;">Welcome, ' + $("#logged-in-username").attr("value") + '</p>'
+            );
+        }
     }
 }
 

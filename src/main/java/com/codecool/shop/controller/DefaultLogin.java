@@ -31,6 +31,9 @@ public class DefaultLogin extends HttpServlet {
             HttpSession session = req.getSession(true);
             session = req.getSession(true);
             session.setAttribute("email", email);
+            session.setAttribute("username", "test");
+            session.setAttribute("login_type", "default");
+
         }
         System.out.println(message);
 
