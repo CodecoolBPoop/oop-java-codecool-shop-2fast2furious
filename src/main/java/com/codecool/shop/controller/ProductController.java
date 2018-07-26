@@ -9,6 +9,7 @@ import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.Product;
+import com.codecool.shop.model.User;
 import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -44,6 +45,11 @@ public class ProductController extends HttpServlet {
 
         Object orderObj = session.getAttribute("order");
         Order order = (Order)orderObj;
+
+        if(!req.getParameter("email").equals("")) {
+            String email = req.getParameter("email");
+            order.setUserID(User.getIdByEmail(email));
+        }
 
         ProductDao productDataStore = ProductDaoSQL.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoSQL.getInstance();

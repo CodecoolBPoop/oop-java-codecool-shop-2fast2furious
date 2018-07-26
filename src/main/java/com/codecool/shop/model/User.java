@@ -135,7 +135,23 @@ public class User {
         }
 
         return false;
+    }
 
+    public static int getIdByEmail(String email) {
+        Connection connection = Connector.getConnection();
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
 
+        try{
+            statement = connection.prepareStatement("SELECT * FROM users where email LIKE ?");
+            statement.setString(1, email);
+            resultSet = statement.executeQuery();
+            resultSet.next();
+            return resultSet.getInt("id");
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return 1;
     }
 }
