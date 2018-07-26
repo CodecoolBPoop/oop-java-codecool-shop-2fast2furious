@@ -26,17 +26,22 @@ public class SignUp extends HttpServlet {
 
         String message = "success";
 
-        if(!User.isUsernameUnique(username)){
-            message = "Username already in use";
-        }else if(!User.isEmailUnique(email)){
-            message = "Email already in use";
-        }else{
-            User.registerNewUser(username,password,email);
-            HttpSession session = req.getSession(true);
-            session = req.getSession(true);
-            session.setAttribute("email", email);
-            session.setAttribute("username", username);
-            session.setAttribute("login_type", "default");
+        if (!User.isEmailUnique(email) && User.isPasswordNull(email)) {
+            User.insertPasswordToUser(password, email, username);
+        } else {
+            if(!User.isUsernameUnique(username)){
+                message = "Username already in use";
+            }else if(!User.isEmailUnique(email)){
+                message = "Email already in use";
+            }else{
+                User.registerNewUser(username,password,email);
+                HttpSession session = req.getSession(true);
+                session = req.getSession(true);
+                session.setAttribute("email", email);
+                session.setAttribute("username", username);
+                session.setAttribute("login_type", "default");
+            }
+
         }
 
         resp.getWriter().write(message);

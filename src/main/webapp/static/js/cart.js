@@ -1,3 +1,4 @@
+
 function defaultLogin() {
     let username = $("#login-username").val();
     let password = $("#login-password").val();
@@ -25,6 +26,29 @@ function defaultLogin() {
             }
         })
     }
+}
+
+function signInFacebook() {
+    FB.login(function(response) {
+        if (response.authResponse) {
+            FB.api('/me', {fields: 'name,email'}, function(response) {
+                $.ajax({
+                    url:"facebook-login",
+                    method: "POST",
+                    data: {
+                        email: response.email
+                    },
+                    success: function() {
+                        window.location.reload(function() {
+                            alert(123)
+                        });
+                    }
+                });
+            });
+        } else {
+            console.log('User cancelled login or did not fully authorize.');
+        }
+    });
 }
 
 function onSignIn(googleUser) {
@@ -58,6 +82,8 @@ function signOut() {
     if ($("#login-type").attr('value') === "google") {
         let auth2 = gapi.auth2.getAuthInstance();
         auth2.signOut()
+    } else if ($("#login-type").attr('value') === "facebook") {
+        FB.logout()
     }
 
     $.ajax({
@@ -121,7 +147,6 @@ function addToCartListener() {
 
     $(".addtocart").click(
         function (event) {
-            console.log(event)
             let size = $("#shoppingcartlink").attr('value');
             $("#shoppingcartlink").attr('value', parseInt(size) + 1);
             $("#shoppingcarticon").attr('data-content', parseInt(size) + 1);
@@ -144,17 +169,21 @@ function buttonListeners() {
             signUp();
         }
     )
+    document.getElementById('btn-fblogin').addEventListener('click', function() {
+        signInFacebook()
+    }, false);
 }
 
 function userCheck() {
     let email = $("#logged-in-email").attr("value")
-    console.log(email)
     if (email == "") {
         $("#navbar-login").show();
     } else {
         let login_type = $("#login-type").attr("value")
         if (login_type === "google") {
             $("#navbar-logout-google").show();
+        } else if (login_type === "facebook") {
+            $("#navbar-logout-facebook").show();
         } else {
             $("#navbar-logout-basic").show();
             $("#navbar-logout-basic .user-name-label").html(
