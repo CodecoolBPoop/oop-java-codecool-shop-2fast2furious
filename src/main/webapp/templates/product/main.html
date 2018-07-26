@@ -34,7 +34,7 @@
             <div class="row">
                 <!--<div class="container-fluid">-->
                 <!--d-flex align-items-stretch-->
-                <div class="col-sm-6 col-md-4 d-flex card-group" th:each="prod,iterStat : ${products}">
+                <div class="col-sm-6 col-md-3 d-flex card-group" th:each="prod,iterStat : ${products}">
                     <!--card-product-->
                     <div class="card card-product">
                         <div class="row pl-4 pt-3 pr-4">
@@ -47,18 +47,19 @@
                             </div>
                         </div>
                         <!--<div class="card-block">-->
-                        <div class="card-image">
+                        <div class="card-image" style="display: flex; justify-content: center; align-items: center">
                             <a href="#">
                                 <img class="img rounded" src="http://placehold.it/400x250/000/fff"
+                                     style="padding: 0px; max-height: 150px; "
                                      th:src="'/static/img/product_' + ${prod.id} + '.jpg'" alt=""/>
                             </a>
                         </div>
                         <div class="card-body">
                             <h6 class="category text-danger">Trending</h6>
-                            <h4 class="card-title">
+                            <h5 class="card-title">
                                 <a href="#" class="card-link" th:text="${prod.name}">Dolce & Gabbana</a>
-                            </h4>
-                            <div class="card-description" th:text="${prod.description}">
+                            </h5>
+                            <div class="card-description" th:text="${prod.description}" style="color: #383d41">
                                 Dolce & Gabbana's 'Greta' tote has been crafted in Italy from hard-wearing red
                                 textured-leather.
                             </div>
