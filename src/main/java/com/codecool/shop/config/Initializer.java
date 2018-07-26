@@ -67,10 +67,15 @@ ProductCategory tire = new ProductCategory("Tire", "Tire", "Tires for cars");
 
 
         Order testOrder = new Order("Tomibacsi");
+        testOrder.setStatus(Status.PAID);
         testOrder.getShoppingCart().add(new OrderedProduct(new Product("BMW Genuine Hamann HM EVO 8.5\" x 20\" Wheel Set", 5499.9f, "USD", "For all BMW Models", tire, yokohama)));
 //        testOrder.TESTsaveOrderToDB();
 
         OrderDaoSQL daoSQL = OrderDaoSQL.getInstance();
+        daoSQL.uploadOrderWithCart(testOrder);
+
+        testOrder.setStatus(Status.NEW);
+        testOrder.setShippingAddress(new Address("HUN", "Budapest", "xxxx", 1039));
         daoSQL.uploadOrderWithCart(testOrder);
     }
 }

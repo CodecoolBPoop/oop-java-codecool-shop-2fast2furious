@@ -18,6 +18,15 @@ public class Order {
     private String userName;
     private Address shippingAddress;
     private Address billingAddress;
+    private Integer orderID = null;
+
+    public Integer getOrderID() {
+        return orderID;
+    }
+
+    public void setOrderID(Integer orderID) {
+        this.orderID = orderID;
+    }
 
     public Address getShippingAddress() {
         return shippingAddress;

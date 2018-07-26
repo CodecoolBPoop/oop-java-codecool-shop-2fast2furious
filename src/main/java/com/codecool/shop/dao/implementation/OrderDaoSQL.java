@@ -26,7 +26,6 @@ public class OrderDaoSQL {
         if (instance == null) {
             instance = new OrderDaoSQL();
         }
-        ;
         return instance;
     }
 
@@ -87,6 +86,7 @@ public class OrderDaoSQL {
 
     public void uploadOrderWithCart(Order order) {
 
+
         String orderUserName = ((order.getUserName()) == null) ? "" : order.getUserName();
         String username = (order.getUser() == null) ? "" : order.getUser().getName();
         String status = order.getStatus().toString();
@@ -107,10 +107,32 @@ public class OrderDaoSQL {
         ResultSet resultSet = null;
         int generatedKey = 0;
 
+        String SQLmethod;
+
+
+
         try {
-            statement = connection.prepareStatement("INSERT INTO orders (name, sh_country, sh_city, sh_address, sh_postcode, " +
-                    "bill_country, bill_city, bill_address, bill_postcode, status, payment, time) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);", statement.RETURN_GENERATED_KEYS
-            );
+            if (order.getOrderID() != null) {
+                statement = connection.prepareStatement("UPDATE orders " +
+                        "SET name = ?," +
+                        "sh_country = ?," +
+                        "sh_city = ?," +
+                        "sh_address = ?," +
+                        "sh_postcode = ?," +
+                        "bill_country = ?," +
+                        "bill_city = ?," +
+                        "bill_address = ?," +
+                        "bill_postcode = ?," +
+                        "status = ?," +
+                        "payment = ? " +
+                        "WHERE id = ?;");
+            } else {
+                statement = connection.prepareStatement("INSERT INTO orders (name, sh_country, sh_city," +
+                        "sh_address, sh_postcode, bill_country, bill_city, bill_address, bill_postcode, status, payment, time)" +
+                        "VALUES (?,?,?,?,?,?,?,?,?,?,?,?);", statement.RETURN_GENERATED_KEYS);
+            }
+
+            System.out.println(statement);
             statement.setString(1, orderUserName);
             statement.setString(2, shippingCountry);
             statement.setString(3, shippingCity);
@@ -122,12 +144,19 @@ public class OrderDaoSQL {
             statement.setString(9, billingPostcode);
             statement.setString(10, status);
             statement.setString(11, payment);
-            statement.setTimestamp(12, sqlDate);
-
+            if(order.getOrderID() == null) {
+                statement.setTimestamp(12, sqlDate);
+            } else {
+                statement.setInt(12, order.getOrderID());
+            }
+            System.out.println(statement);
             statement.executeUpdate();
-            resultSet = statement.getGeneratedKeys();
-            if (resultSet.next()) {
-                generatedKey = resultSet.getInt(1);
+
+            if(order.getOrderID() == null) {
+                resultSet = statement.getGeneratedKeys();
+                if (resultSet.next()) {
+                    generatedKey = resultSet.getInt(1);
+                }
             }
 
             System.out.println("Inserted record's ID: " + generatedKey);
@@ -136,22 +165,27 @@ public class OrderDaoSQL {
             e.printStackTrace();
         }
 
-        for (OrderedProduct ordered : order.getShoppingCart()) {
-            try {
-                connection = Connector.getConnection();
-                statement = null;
-                resultSet = null;
+        order.setOrderID(generatedKey);
 
-                statement = connection.prepareStatement("INSERT INTO shopping_cart (product, price, order_id) VALUES (?,?,?);");
-                statement.setInt(1, ordered.getProductId());
-                statement.setFloat(2, ordered.getPriceAsFloat());
-                statement.setInt(3, generatedKey);
-                statement.executeUpdate();
-                System.out.println("Cart saved");
-            } catch (SQLException e) {
-                e.printStackTrace();
+        if (!order.getShoppingCart().isEmpty()) {
+            for (OrderedProduct ordered : order.getShoppingCart()) {
+                try {
+                    connection = Connector.getConnection();
+                    statement = null;
+                    resultSet = null;
+
+                    statement = connection.prepareStatement("INSERT INTO shopping_cart (product, price, order_id) VALUES (?,?,?);");
+                    statement.setInt(1, ordered.getProductId());
+                    statement.setFloat(2, ordered.getPriceAsFloat());
+                    statement.setInt(3, generatedKey);
+                    statement.executeUpdate();
+                    System.out.println("Cart saved");
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         }
+
     }
 
 }
