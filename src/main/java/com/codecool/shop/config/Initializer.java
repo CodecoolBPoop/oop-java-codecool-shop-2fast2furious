@@ -76,6 +76,8 @@ ProductCategory tire = new ProductCategory("Tire", "Tire", "Tires for cars");
 
         testOrder.setStatus(Status.NEW);
         testOrder.setShippingAddress(new Address("HUN", "Budapest", "xxxx", 1039));
+        testOrder.addProduct(productDataStore.find(1));
+        testOrder.removeProduct(productDataStore.find(1));
         daoSQL.uploadOrderWithCart(testOrder);
     }
 }

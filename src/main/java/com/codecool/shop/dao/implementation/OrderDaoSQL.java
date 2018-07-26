@@ -156,6 +156,7 @@ public class OrderDaoSQL {
                 resultSet = statement.getGeneratedKeys();
                 if (resultSet.next()) {
                     generatedKey = resultSet.getInt(1);
+                    order.setOrderID(generatedKey);
                 }
             }
 
@@ -165,9 +166,19 @@ public class OrderDaoSQL {
             e.printStackTrace();
         }
 
-        order.setOrderID(generatedKey);
+
 
         if (!order.getShoppingCart().isEmpty()) {
+            statement = null;
+            try {
+                statement = connection.prepareStatement("DELETE FROM shopping_cart WHERE order_id = ?");
+                statement.setInt(1, order.getOrderID());
+                statement.executeUpdate();
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+
+
             for (OrderedProduct ordered : order.getShoppingCart()) {
                 try {
                     connection = Connector.getConnection();
@@ -177,7 +188,7 @@ public class OrderDaoSQL {
                     statement = connection.prepareStatement("INSERT INTO shopping_cart (product, price, order_id) VALUES (?,?,?);");
                     statement.setInt(1, ordered.getProductId());
                     statement.setFloat(2, ordered.getPriceAsFloat());
-                    statement.setInt(3, generatedKey);
+                    statement.setInt(3, order.getOrderID());
                     statement.executeUpdate();
                     System.out.println("Cart saved");
                 } catch (SQLException e) {
@@ -185,6 +196,20 @@ public class OrderDaoSQL {
                 }
             }
         }
+
+    }
+
+    public Order retrieveOrderFromSQL(int orderId){
+        Connection connection = Connector.getConnection();
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        try {
+            statement = connection.prepareStatement("");
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+
 
     }
 

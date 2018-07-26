@@ -1,8 +1,7 @@
 package com.codecool.shop.controller;
 
-import com.codecool.shop.model.Order;
-import com.codecool.shop.model.User;
 
+import com.codecool.shop.model.User;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

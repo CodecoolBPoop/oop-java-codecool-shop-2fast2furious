@@ -8,10 +8,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Order {
 
     private ArrayList<OrderedProduct> shoppingCart = new ArrayList<OrderedProduct>();
+    private ArrayList<Product> toSQL = new ArrayList<Product>();
     private User user;
     private Status status = Status.NEW;
     private Payment payment;
@@ -159,6 +161,14 @@ public class Order {
 
     public void setPayment(Payment payment) {
         this.payment = payment;
+    }
+
+    public List<Product> returnProductToSQL(){
+        return toSQL;
+    }
+
+    public void emptyToSQL(){
+        toSQL = new ArrayList<>();
     }
 
   /*  public void saveOrderToDB() {
