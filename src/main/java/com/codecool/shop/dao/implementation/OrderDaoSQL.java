@@ -1,6 +1,8 @@
 package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.Connector;
+import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.model.Address;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.OrderedProduct;
 
@@ -132,6 +134,7 @@ public class OrderDaoSQL {
                         "VALUES (?,?,?,?,?,?,?,?,?,?,?,?);", statement.RETURN_GENERATED_KEYS);
             }
 
+
             System.out.println(statement);
             statement.setString(1, orderUserName);
             statement.setString(2, shippingCountry);
@@ -200,11 +203,59 @@ public class OrderDaoSQL {
     }
 
     public Order retrieveOrderFromSQL(int orderId){
+        Order order = new Order();
         Connection connection = Connector.getConnection();
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try {
-            statement = connection.prepareStatement("");
+            statement = connection.prepareStatement("SELECT * FROM orders WHERE id = ?");
+            statement.setInt(1, orderId);
+            resultSet.next();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+
+        try {
+            if (!resultSet.getString("sh_country").equals("")){
+                Address saddress = new Address(resultSet.getString("sh_country"),resultSet.getString("sh_city"),resultSet.getString("sh_address"), resultSet.getInt("sh_postcode"));
+                order.setShippingAddress(saddress);
+            }
+            if (!resultSet.getString("bill_country").equals("")){
+                Address baddress = new Address(resultSet.getString("bill_country"),resultSet.getString("bill_city"),resultSet.getString("bill_address"), resultSet.getInt("bill_postcode"));
+                order.setBillingAddress(baddress);
+            }
+
+            int id = resultSet.getInt("id");
+            order.setOrderID(id);
+
+
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        statement = null;
+        resultSet = null;
+        ProductDao products = ProductDaoSQL.getInstance();
+
+        try {
+            statement = connection.prepareStatement("SELECT * FROM shopping_cart WHERE order_id = ?");
+            statement.setInt(1, orderId);
+            resultSet = statement.executeQuery();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        try{
+            while(resultSet.next()){
+                int productId = resultSet.getInt("product");
+                order.addProduct(products.find(productId));
+
+            }
+
+
+
         }catch (SQLException e){
             e.printStackTrace();
         }
