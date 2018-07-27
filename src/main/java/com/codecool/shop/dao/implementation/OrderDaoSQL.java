@@ -109,8 +109,6 @@ public class OrderDaoSQL {
         ResultSet resultSet = null;
         int generatedKey = 0;
 
-        String SQLmethod;
-
 
         try {
             if (order.getOrderID() != null) {
@@ -131,6 +129,7 @@ public class OrderDaoSQL {
                 statement = connection.prepareStatement("INSERT INTO orders (name, sh_country, sh_city," +
                         "sh_address, sh_postcode, bill_country, bill_city, bill_address, bill_postcode, status, payment, time, user_id)" +
                         "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);", statement.RETURN_GENERATED_KEYS);
+                statement.setInt(13, order.getUserID());
             }
 
 
@@ -151,7 +150,7 @@ public class OrderDaoSQL {
             } else {
                 statement.setInt(12, order.getOrderID());
             }
-            statement.setInt(13, order.getUserID());
+
             System.out.println(statement);
             statement.executeUpdate();
 

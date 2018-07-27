@@ -46,13 +46,14 @@ public class ProductController extends HttpServlet {
             session.setAttribute("order", new Order());
             session.setAttribute("email", "");
         }
+        System.out.println("The email is " + session.getAttribute("email"));
 
         Object orderObj = session.getAttribute("order");
         Order order = (Order) orderObj;
 
-        if (!(session.getAttribute("email") == null || session.getAttribute("email").equals(""))) {
-            String email = req.getParameter("email");
-            order.setUserID(User.getIdByEmail(email));
+        if (!session.getAttribute("email").equals("")) {
+            Object email = session.getAttribute("email");
+            order.setUserID(User.getIdByEmail((String)email));
         }
 
         ProductDao productDataStore = ProductDaoSQL.getInstance();

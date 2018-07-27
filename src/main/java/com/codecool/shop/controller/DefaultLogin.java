@@ -28,6 +28,7 @@ public class DefaultLogin extends HttpServlet {
         if(!success){
             message = "Username or password invalid";
         }else{
+
             message = "success";
             HttpSession session = req.getSession(true);
             session = req.getSession(true);
