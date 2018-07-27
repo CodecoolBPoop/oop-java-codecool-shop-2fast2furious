@@ -2,10 +2,8 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementation.ProductDaoMem;
+import com.codecool.shop.dao.implementation.*;
 import com.codecool.shop.config.TemplateEngineUtil;
-import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.Product;
@@ -32,12 +30,16 @@ public class RemoveFromCart extends HttpServlet {
 
         int productId = Integer.parseInt(req.getParameter("id"));
 
-        ProductDao productDataStore = ProductDaoMem.getInstance();
+        ProductDao productDataStore = ProductDaoSQL.getInstance();
 
 
         HttpSession session = req.getSession();
         Object orderObj = session.getAttribute("order");
         Order order = (Order) orderObj;
+
+        if (!(session.getAttribute("email") == null || session.getAttribute("email").equals(""))){
+            OrderDaoSQL.getInstance().uploadOrderWithCart(order);
+        }
 
 
         if (order.getStatus() == Status.NEW) {

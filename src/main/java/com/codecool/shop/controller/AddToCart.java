@@ -1,6 +1,7 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.implementation.OrderDaoSQL;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoSQL;
 import com.codecool.shop.model.Order;
@@ -33,7 +34,9 @@ public class AddToCart extends HttpServlet {
 
         Object orderObj = session.getAttribute("order");
         Order order = (Order)orderObj;
-
+        if (!(session.getAttribute("email") == null || session.getAttribute("email").equals(""))){
+            OrderDaoSQL.getInstance().uploadOrderWithCart(order);
+        }
 
 
         if (order.getStatus() == Status.NEW) {
