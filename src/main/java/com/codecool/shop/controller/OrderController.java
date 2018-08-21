@@ -3,7 +3,6 @@ package com.codecool.shop.controller;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.implementation.OrderDaoSQL;
 import com.codecool.shop.model.Order;
-import com.codecool.shop.model.User;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -14,36 +13,28 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
-@WebServlet(urlPatterns = {"/orderhistory"})
-public class OrderHistory extends HttpServlet {
+@WebServlet(urlPatterns = {"/order"})
+public class OrderController extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
         HttpSession session = req.getSession(false);
-        String email="";
-        try {
-            email = (String)session.getAttribute("email");
-        } catch (Exception e) {}
+        if(session == null){
+            session = req.getSession(true);
+            session.setAttribute("email", "");
+        }
+        int id = Integer.parseInt((String)req.getParameter("id"));
+        Order order = OrderDaoSQL.getInstance().retrieveOrderFromSQL(id);
 
-        ArrayList<Order> orders;
-        OrderDaoSQL orderDao = OrderDaoSQL.getInstance();
-        Integer id = User.getIdByEmail(email);
-        System.out.println("id: " + id);
-        orders = orderDao.retrieveAllOrdersByUserID(id);
-        System.out.println("asdf");
-        System.out.println(orders);
-        System.out.println("ASDF");
 
-        context.setVariable("page", "product/orderhistory.html");
-        context.setVariable("session", session);
-        context.setVariable("orders", orders);
-        context.setVariable("orders", orders);
+        context.setVariable("page", "product/order.html");
+        context.setVariable("products", order.getShoppingCart());
+        context.setVariable("total", order.getTotal());
         engine.process("product/index.html", context, resp.getWriter());
 
     }

@@ -20,7 +20,7 @@
             </thead>
             <tbody>
             <tr th:each="prod,iterStat : ${products}">
-                <td th:text="${prod.getName()}">Lenovo Phone</td>
+                <td th:text="${prod.getName()}">Lenovo Phon</td>
                 <td th:text="${prod.getPrice()}">100 USD</td>
                 <td th:text="${prod.getQuantity()}" th:attr="data-qid=${prod.getId()}">10 pcs</td>
                 <td>
@@ -35,7 +35,7 @@
             <button class="btn btn-success" id="checkouttoggle">Check Out</button>
             <button class="btn btn-success" id="paytoggle">Pay</button>
         </div>
-        <h1 th:text="'The total of your order is '+  ${total} + ' USD'" id="total">Total</h1>
+        <h1 th:text="'The total of your orderController is '+  ${total} + ' USD'" id="total">Total</h1>
         <div id="checkout">
             <h2>Check out</h2>
             <form action="" id="checkoutform">

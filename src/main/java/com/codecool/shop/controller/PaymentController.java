@@ -1,12 +1,7 @@
 package com.codecool.shop.controller;
 
-import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.implementation.ProductDaoMem;
-import com.codecool.shop.model.*;
+import com.codecool.shop.model.Order;
 import com.codecool.shop.process.PaymentProcess;
-import org.json.HTTP;
-import org.json.JSONException;
-import org.json.JSONObject;
 //import sun.misc.IOUtils;
 
 import javax.servlet.ServletException;
@@ -15,9 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 @WebServlet(urlPatterns = {"/creditcard_payment"})
 public class PaymentController extends HttpServlet {
@@ -31,11 +24,11 @@ public class PaymentController extends HttpServlet {
         String expiryDate = req.getParameter("expirydate");
 
         HttpSession session = req.getSession();
-        Object orderObj = session.getAttribute("order");
-        Order order = (Order) orderObj;
+        Object orderObj = session.getAttribute("orderController");
+        Order orderController = (Order) orderObj;
 
-        boolean result = PaymentProcess.payment(order, cardNumber, holderName, cvcNumber, expiryDate);
-        System.out.println(order.getStatus());
+        boolean result = PaymentProcess.payment(orderController, cardNumber, holderName, cvcNumber, expiryDate);
+        System.out.println(orderController.getStatus());
 
     }
 
