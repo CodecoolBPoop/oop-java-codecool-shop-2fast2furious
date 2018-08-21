@@ -80,8 +80,7 @@ public class OrderDaoSQL {
                 generatedKey = resultSet.getInt(1);
             }
 
-            System.out.println("Inserted record's ID: " + generatedKey);
-            System.out.println("Order saved");
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -151,7 +150,7 @@ public class OrderDaoSQL {
                 statement.setInt(12, order.getOrderID());
             }
 
-            System.out.println(statement);
+
             statement.executeUpdate();
 
             if (order.getOrderID() == null) {
@@ -162,15 +161,13 @@ public class OrderDaoSQL {
                 }
             }
 
-            System.out.println("Inserted record's ID: " + generatedKey);
-            System.out.println("Order saved");
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
 
-        if (!order.getShoppingCart().isEmpty()) {
-            statement = null;
+        /*if (!order.getShoppingCart().isEmpty()) {*/
             try {
                 statement = connection.prepareStatement("DELETE FROM shopping_cart WHERE order_id = ?");
                 statement.setInt(1, order.getOrderID());
@@ -186,17 +183,20 @@ public class OrderDaoSQL {
                     statement = null;
                     resultSet = null;
 
+
                     statement = connection.prepareStatement("INSERT INTO shopping_cart (product, price, order_id) VALUES (?,?,?);");
                     statement.setInt(1, ordered.getProductId());
                     statement.setFloat(2, ordered.getPriceAsFloat());
                     statement.setInt(3, order.getOrderID());
-                    statement.executeUpdate();
-                    System.out.println("Cart saved");
+                    for(int i = 0; i < ordered.getQuantity(); i++) {
+                        statement.executeUpdate();
+                    }
+
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
             }
-        }
+        /*}*/
 
     }
 

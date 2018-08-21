@@ -34,9 +34,7 @@ public class AddToCart extends HttpServlet {
 
         Object orderObj = session.getAttribute("order");
         Order order = (Order)orderObj;
-        if (!(session.getAttribute("email") == null || session.getAttribute("email").equals(""))){
-            OrderDaoSQL.getInstance().uploadOrderWithCart(order);
-        }
+
 
 
         if (order.getStatus() == Status.NEW) {
@@ -46,6 +44,10 @@ public class AddToCart extends HttpServlet {
             resp.setContentType("text/plain");
             resp.setCharacterEncoding("UTF-8");
             resp.getWriter().write(String.valueOf(order.getTotal()));
+        }
+
+        if (!(session.getAttribute("email") == null || session.getAttribute("email").equals(""))){
+            OrderDaoSQL.getInstance().uploadOrderWithCart(order);
         }
     }
 
