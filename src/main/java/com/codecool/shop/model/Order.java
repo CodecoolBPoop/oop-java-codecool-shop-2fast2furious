@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Order {
@@ -18,10 +19,15 @@ public class Order {
     private Status status = Status.NEW;
     private Payment payment;
     private String userName;
+    private Date date;
     private Address shippingAddress;
     private Address billingAddress;
     private Integer orderID = null;
     private int userID;
+
+    public Date getDate() { return date; }
+
+    public void setDate(Date date) { this.date = date; }
 
     public int getUserID() {
         return userID;
@@ -95,9 +101,9 @@ public class Order {
     }
 
 
-    /*public static Order getInstance() {
+    /*public static OrderController getInstance() {
         if (instance == null) {
-            instance = new Order();
+            instance = new OrderController();
             instance.status = Status.NEW;
         }
         return instance;

@@ -1,5 +1,7 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.model.User;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,6 +21,7 @@ public class FacebookLogin extends HttpServlet {
         session = req.getSession(true);
         session.setAttribute("login_type", "facebook");
         session.setAttribute("email", email);
+        User.registerUserWithAuth(email);
 
     }
 

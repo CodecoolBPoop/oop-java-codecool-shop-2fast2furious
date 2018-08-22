@@ -81,7 +81,7 @@ public class OrderDaoSQL {
             }
 
             System.out.println("Inserted record's ID: " + generatedKey);
-            System.out.println("Order saved");
+            System.out.println("OrderController saved");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -163,7 +163,7 @@ public class OrderDaoSQL {
             }
 
             System.out.println("Inserted record's ID: " + generatedKey);
-            System.out.println("Order saved");
+            System.out.println("OrderController saved");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -227,6 +227,8 @@ public class OrderDaoSQL {
 
             int id = resultSet.getInt("id");
             order.setOrderID(id);
+
+            order.setDate(resultSet.getDate("time"));
 
 
         } catch (SQLException e) {

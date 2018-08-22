@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>NAVBAR</title>
+</head>
+<body>
+
+<div class="container" th:switch="${total}" th:fragment="content">
+    <h1 th:case="0">Your shoppingcart is empty :(</h1>
+    <div name="notEmpty" th:case="*">
+        <table class="table">
+            <thead>
+            <tr id="thead">
+                <th class="text-white" scope="col">Product</th>
+                <th class="text-white" scope="col">Price</th>
+                <th class="text-white" scope="col">Quantity</th>
+                <th class="text-white" scope="col">Add more/Take out</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="prod,iterStat : ${products}">
+                <td th:text="${prod.getName()}">Lenovo Phon</td>
+                <td th:text="${prod.getPrice()}">100 USD</td>
+                <!--<td th:text="${prod.getQuantity()}" th:attr="data-qid=${prod.getId()}">10 pcs</td>-->
+            </tr>
+            </tbody>
+
+        </table>
+        <h1 th:text="'The total of your orderController is '+  ${total} + ' USD'" id="total">Total</h1>
+
+        <hr style="margin-bottom: 20px">
+
+
+    </div>
+    <a href="/orderhistory" class="btn btn-success">Back to orderController history</a>
+
+
+</div>
+
+
+</body>
+</html>

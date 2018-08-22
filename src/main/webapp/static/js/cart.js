@@ -32,6 +32,7 @@ function signInFacebook() {
     FB.login(function(response) {
         if (response.authResponse) {
             FB.api('/me', {fields: 'name,email'}, function(response) {
+                console.log(response.email)
                 $.ajax({
                     url:"facebook-login",
                     method: "POST",

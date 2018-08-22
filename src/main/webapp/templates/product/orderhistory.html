@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>NAVBAR</title>
+</head>
+<body>
+
+<div class="container" th:switch="${total}" th:fragment="content">
+    <table class="table">
+        <thead>
+        <tr id="thead">
+            <th class="text-white" scope="col">Date</th>
+            <th class="text-white" scope="col">Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order,iterStat : ${orders}">
+            <td th:text="${order.getDate()}">Lenovo Phone</td>
+            <td th:text="${order.getTotal()}">100 USD</td>
+            <td>
+                <a th:href="@{/order(id=${order.getOrderID()})}" >Jump</a>
+            </td>
+        </tr>
+        </tbody>
+
+    </table>
+
+</div>
+
+
+</body>
+</html>
