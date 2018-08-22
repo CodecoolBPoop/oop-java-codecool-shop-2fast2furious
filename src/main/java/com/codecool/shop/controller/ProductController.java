@@ -51,6 +51,8 @@ public class ProductController extends HttpServlet {
         Object orderObj = session.getAttribute("order");
         Order order = (Order) orderObj;
 
+
+
         if (!session.getAttribute("email").equals("")) {
             Object email = session.getAttribute("email");
             order.setUserID(User.getIdByEmail((String)email));

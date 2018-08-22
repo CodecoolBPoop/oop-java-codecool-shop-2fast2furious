@@ -1,5 +1,7 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.dao.implementation.OrderDaoSQL;
+import com.codecool.shop.model.Order;
 import com.codecool.shop.model.User;
 import org.json.JSONObject;
 
@@ -50,6 +52,13 @@ public class GmailLogin extends HttpServlet {
         session = req.getSession(true);
         session.setAttribute("login_type", "google");
         session.setAttribute("email", email);
+        if(session.getAttribute("order") == null){
+            session.setAttribute("order", new Order());
+        }else{
+            Order order = (Order)session.getAttribute("order");
+            order.setUserID(User.getIdByEmail(email));
+            OrderDaoSQL.getInstance().uploadOrderWithCart(order);
+        }
 
     }
 

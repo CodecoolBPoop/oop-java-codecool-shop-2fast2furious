@@ -36,7 +36,7 @@ public class OrderHistory extends HttpServlet {
             email = (String)session.getAttribute("email");
         } catch (Exception e) {}
 
-        ArrayList<Order> orders;
+
         OrderDaoSQL orderDao = OrderDaoSQL.getInstance();
         Integer id = User.getIdByEmail(email);
         System.out.println("id: " + id);
