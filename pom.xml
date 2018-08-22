@@ -95,8 +95,8 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.3.0-M1</version>
-            <scope>compile</scope>
+            <version>RELEASE</version>
+            <scope>test</scope>
         </dependency>
 
 
