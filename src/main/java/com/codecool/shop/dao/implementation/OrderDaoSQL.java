@@ -80,7 +80,6 @@ public class OrderDaoSQL {
                 generatedKey = resultSet.getInt(1);
             }
 
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -161,7 +160,6 @@ public class OrderDaoSQL {
                 }
             }
 
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -227,6 +225,8 @@ public class OrderDaoSQL {
 
             int id = resultSet.getInt("id");
             order.setOrderID(id);
+
+            order.setDate(resultSet.getDate("time"));
 
 
         } catch (SQLException e) {

@@ -216,10 +216,8 @@ public class User {
             resultSet = statement.executeQuery();
             resultSet.next();
             return resultSet.getInt("id");
-        } catch (SQLException e){
-            e.printStackTrace();
-        }
+        } catch (SQLException e) {}
 
-        return 1;
+        return 0;
     }
 }
