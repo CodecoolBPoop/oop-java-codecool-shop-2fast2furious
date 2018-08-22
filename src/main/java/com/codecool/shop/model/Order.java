@@ -126,10 +126,11 @@ public class Order {
     }
 
     public String toString() {
-        String result = "Im a fucking shopping cart ";
+        String result = "---\nOrder #" + orderID + " \n";
         for (OrderedProduct product : shoppingCart) {
-            result += product.getProductId() + " " + product.getName() + " " + product.getQuantity() + "\n";
+            result += "Product ID: " + product.getProductId() + ", Product name: " + product.getName() + ", Product quantity: " + product.getQuantity() + "\n";
         }
+        result += "---";
         return result;
 
     }

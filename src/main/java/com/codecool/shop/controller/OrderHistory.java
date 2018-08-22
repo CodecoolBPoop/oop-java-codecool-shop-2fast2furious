@@ -12,8 +12,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +27,8 @@ public class OrderHistory extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
+        List<Order> orders = new ArrayList<Order>();
+
 
         HttpSession session = req.getSession(false);
         String email="";
@@ -45,6 +50,7 @@ public class OrderHistory extends HttpServlet {
         context.setVariable("orders", orders);
         context.setVariable("orders", orders);
         engine.process("product/index.html", context, resp.getWriter());
+
 
     }
 

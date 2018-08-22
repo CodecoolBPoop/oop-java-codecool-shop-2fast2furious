@@ -208,7 +208,7 @@ public class User {
         Connection connection = Connector.getConnection();
         PreparedStatement statement = null;
         ResultSet resultSet = null;
-        System.out.println(email);
+        
 
         try{
             statement = connection.prepareStatement("SELECT * FROM users where email LIKE ?");
