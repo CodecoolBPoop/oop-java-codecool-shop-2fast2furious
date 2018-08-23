@@ -3,6 +3,7 @@ package com.codecool.shop.controller;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.implementation.OrderDaoSQL;
 import com.codecool.shop.model.Order;
+import com.codecool.shop.model.User;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -31,10 +32,16 @@ public class OrderController extends HttpServlet {
         int id = Integer.parseInt((String)req.getParameter("id"));
         Order order = OrderDaoSQL.getInstance().retrieveOrderFromSQL(id);
 
+        System.out.println("id: " + id + " user: " + order.getUserID());
 
         context.setVariable("page", "product/order.html");
-        context.setVariable("products", order.getShoppingCart());
-        context.setVariable("total", order.getTotal());
+        if (order.getUserID() == User.getIdByEmail(session.getAttribute("email").toString())) {
+            context.setVariable("products", order.getShoppingCart());
+            context.setVariable("total", order.getTotal());
+        } else {
+            context.setVariable("products", null);
+            context.setVariable("total", 0);
+        }
         engine.process("product/index.html", context, resp.getWriter());
 
     }

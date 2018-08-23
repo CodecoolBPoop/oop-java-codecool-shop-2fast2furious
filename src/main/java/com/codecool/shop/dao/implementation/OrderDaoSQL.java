@@ -225,7 +225,7 @@ public class OrderDaoSQL {
 
             int id = resultSet.getInt("id");
             order.setOrderID(id);
-
+            order.setUserID(resultSet.getInt("user_id"));
             order.setDate(resultSet.getDate("time"));
 
 
